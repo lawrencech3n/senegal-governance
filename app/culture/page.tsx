@@ -1,0 +1,51 @@
+import { cultureThemes } from "@/lib/data/culture";
+
+export default function CulturePage() {
+  return (
+    <div className="space-y-12">
+      <header className="max-w-3xl">
+        <div className="text-xs uppercase tracking-[0.3em] text-rust mb-3">
+          Section 06
+        </div>
+        <h2 className="font-serif text-5xl text-ink mb-4">Culture</h2>
+        <p className="prose-serif text-ink/80">
+          Money and minerals are easy to count. The harder things to measure
+          are the institutions, languages, and habits of mind that the
+          colonial encounter left in place. This is the most subjective
+          section of the project, and the one with the longest tail.
+        </p>
+      </header>
+
+      <section className="space-y-6">
+        {cultureThemes.map((t, i) => (
+          <article
+            key={t.title}
+            className={`grid md:grid-cols-[180px_1fr] gap-6 py-6 ${
+              i !== 0 ? "border-t border-ink/15" : ""
+            }`}
+          >
+            <div className="md:text-right">
+              <div className="text-xs uppercase tracking-[0.2em] text-rust">
+                {t.era}
+              </div>
+            </div>
+            <div>
+              <h3 className="font-serif text-3xl text-ink mb-2">{t.title}</h3>
+              <p className="prose-serif text-ink/80 max-w-2xl">{t.body}</p>
+            </div>
+          </article>
+        ))}
+      </section>
+
+      <section className="border-l-4 border-rust pl-6 max-w-3xl">
+        <p className="prose-serif italic text-ink/80">
+          &ldquo;The colonial bourgeoisie&hellip; identifies itself with the Western
+          bourgeoisie, from whom it has learnt its lessons.&rdquo;
+        </p>
+        <p className="text-sm text-ink/60 mt-2">
+          — Frantz Fanon, <em>The Wretched of the Earth</em>, 1961
+        </p>
+      </section>
+    </div>
+  );
+}
