@@ -18,13 +18,11 @@ export default function EnvironmentPage() {
       </header>
 
       <section className="space-y-4">
-        <h3 className="font-serif text-3xl text-ink">A century of decline</h3>
+        <h3 className="font-serif text-3xl text-ink">Since 1990</h3>
         <EnvironmentChart />
         <p className="text-sm text-ink/60 max-w-3xl">
-          Each series indexed to its 1900 baseline. Sources: FAO forest
-          assessments, Mangrove Watch, Sea Around Us project, ISRIC SoilGrids.
-          Pre-1960 figures are interpolated from sparse survey data and
-          should be read as orders of magnitude.
+          Each series indexed to its 1990 baseline. Sources: World Bank indicators
+          derived from FAO (forest area % of land; fish capture production).
         </p>
       </section>
 

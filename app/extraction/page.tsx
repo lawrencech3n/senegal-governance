@@ -11,36 +11,31 @@ export default function ExtractionPage() {
         </div>
         <h2 className="font-serif text-5xl text-ink mb-4">Extraction</h2>
         <p className="prose-serif text-ink/80">
-          The first thing to notice about the chart below is not the size of
-          the bars — it&apos;s their color. The dark portion is value leaving
-          Senegal. Independence in 1960 didn&apos;t change the proportion as
-          much as the textbook story implies. The local share has grown,
-          slowly, but the resources still mostly travel.
+          The chart below uses World Bank trade series to show how Senegal’s
+          merchandise exports are composed. It’s not a full accounting of
+          “extraction,” but it does make the basic structure visible: what
+          kinds of goods dominate, and how that mix shifts over time.
         </p>
       </header>
 
       <section className="space-y-4">
         <h3 className="font-serif text-3xl text-ink">
-          Annual extracted value, 1900–2024
+          Merchandise exports by category, 1962–2024
         </h3>
         <ExtractionChart />
         <p className="text-sm text-ink/60 max-w-3xl">
-          Bars stack value retained in Senegal (taxes, royalties, local
-          wages) against value exported (sale value of resources flowing
-          abroad, net of local retention). Pre-1960 figures are
-          orders-of-magnitude estimates; the 1900–1940 entries reflect
-          peanut and gum arabic exports valued in 2020 USD.
+          Stacked bars decompose total merchandise exports into fuels, ores & metals,
+          food, and agricultural raw materials (USD, current). Source: World Bank
+          indicators for merchandise exports and export composition.
         </p>
       </section>
 
       <section className="space-y-4">
-        <h3 className="font-serif text-3xl text-ink">Where does it go?</h3>
+        <h3 className="font-serif text-3xl text-ink">What is exported?</h3>
         <p className="prose-serif text-ink/80 max-w-3xl">
-          The destinations have diversified since 1960 — France is no
-          longer the single dominant buyer of any major resource — but the
-          structure is recognizable: gold to Swiss refineries, fish to
-          Spanish ports, phosphate to Indian fertilizer plants, mineral
-          sands to Chinese smelters.
+          This snapshot shows the same merchandise export categories for 2020.
+          It’s a coarse taxonomy, but it helps anchor the narrative in a
+          consistent, internationally comparable dataset.
         </p>
         <DestinationChart />
       </section>

@@ -11,21 +11,13 @@ import {
   ReferenceLine,
   ReferenceArea,
 } from "recharts";
-import { senegalRegimes } from "@/lib/data/government";
-
-// Build a year-by-year series of V-Dem score by regime.
-const data: { year: number; vdem: number; leader: string }[] = [];
-for (const r of senegalRegimes) {
-  for (let y = r.start; y <= r.end; y++) {
-    data.push({ year: y, vdem: r.vdemScore, leader: r.leader });
-  }
-}
+import { vdemLibDemSenegal } from "@/lib/data/government";
 
 export function RegimeChart() {
   return (
     <div className="w-full h-[360px] border border-ink/15 bg-parchment/40 p-4">
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={data} margin={{ top: 20, right: 30, bottom: 30, left: 10 }}>
+        <LineChart data={vdemLibDemSenegal} margin={{ top: 20, right: 30, bottom: 30, left: 10 }}>
           <CartesianGrid stroke="#1a181420" vertical={false} />
           <XAxis dataKey="year" stroke="#1a1814" tick={{ fontSize: 12 }} />
           <YAxis

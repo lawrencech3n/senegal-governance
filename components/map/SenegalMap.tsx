@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import dynamic from "next/dynamic";
 import { regions, extractionSites } from "@/lib/data/regions";
-import { extractionByYear } from "@/lib/data/extraction";
+import { exportsByCategoryByYear } from "@/lib/data/extraction";
 
 const MapInner = dynamic(() => import("./MapInner"), {
   ssr: false,
@@ -39,9 +39,22 @@ const incomeForYear = (
 };
 
 export function SenegalMap() {
-  const yearOptions = useMemo(() => extractionByYear.map((d) => d.year), []);
-  const [year, setYear] = useState<number>(2020);
+  const yearOptions = useMemo(
+    () => exportsByCategoryByYear.map((d) => d.year),
+    [],
+  );
+  const minYear = yearOptions[0] ?? 1960;
+  const maxYear = yearOptions[yearOptions.length - 1] ?? 2024;
+  const [year, setYear] = useState<number>(Math.min(2020, maxYear));
   const [selectedRegion, setSelectedRegion] = useState<string | null>("Dakar");
+
+  if (regions.length === 0) {
+    return (
+      <div className="border border-ink/15 bg-parchment/60 p-6 text-sm text-ink/70">
+        Map data is not yet populated.
+      </div>
+    );
+  }
 
   const region = regions.find((r) => r.name === selectedRegion) ?? regions[0];
   const visibleSites = extractionSites.filter((s) => s.startedYear <= year);
@@ -58,17 +71,17 @@ export function SenegalMap() {
         </div>
         <input
           type="range"
-          min={1900}
-          max={2024}
+          min={minYear}
+          max={maxYear}
           step={1}
           value={year}
           onChange={(e) => setYear(Number(e.target.value))}
           className="w-full accent-rust"
         />
         <div className="flex justify-between text-xs text-ink/50 mt-1">
-          <span>1900</span>
+          <span>{minYear}</span>
           <span className="text-rust">| 1960 independence</span>
-          <span>2024</span>
+          <span>{maxYear}</span>
         </div>
         <div className="flex flex-wrap gap-2 mt-3">
           {yearOptions.map((y) => (

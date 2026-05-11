@@ -26,8 +26,8 @@ export default function GovernmentPage() {
         </h3>
         <RegimeChart />
         <p className="text-sm text-ink/60 max-w-3xl">
-          V-Dem&apos;s liberal democracy index, 0–1. Approximate values
-          drawn from the V-Dem dataset; colonial-era values are nominal.
+          V-Dem&apos;s liberal democracy index (0–1), as published by Our World in Data
+          (V-Dem 2026). Colonial-era values are model-based and should be read cautiously.
         </p>
       </section>
 

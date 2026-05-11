@@ -13,14 +13,12 @@ import {
 } from "recharts";
 import { envIndicators } from "@/lib/data/environment";
 
-// Normalize each series to its 1900 value so they share a 0–100 scale.
+// Normalize series to the first observation (1990) so they share a 0–100 scale.
 const base = envIndicators[0];
 const data = envIndicators.map((d) => ({
   year: d.year,
   forest: Math.round((d.forestCoverPct / base.forestCoverPct) * 100),
-  mangrove: Math.round((d.mangroveKm2 / base.mangroveKm2) * 100),
-  fish: Math.round((d.fishBiomassIndex / base.fishBiomassIndex) * 100),
-  soil: Math.round((d.soilCarbonTHa / base.soilCarbonTHa) * 100),
+  fish: Math.round((d.fishCaptureMt / base.fishCaptureMt) * 100),
 }));
 
 export function EnvironmentChart() {
@@ -35,7 +33,7 @@ export function EnvironmentChart() {
             tick={{ fontSize: 12 }}
             domain={[0, 110]}
             label={{
-              value: "Indexed to 1900 = 100",
+              value: "Indexed to 1990 = 100",
               angle: -90,
               position: "insideLeft",
               style: { fontSize: 11, fill: "#1a1814aa" },
@@ -51,9 +49,7 @@ export function EnvironmentChart() {
           <Legend wrapperStyle={{ fontSize: 12 }} />
           <ReferenceLine x={1960} stroke="#5c1a1a" strokeDasharray="4 4" label={{ value: "Independence", fontSize: 11, fill: "#5c1a1a" }} />
           <Line dataKey="forest" name="Forest cover" stroke="#6a7d5e" strokeWidth={2} dot />
-          <Line dataKey="mangrove" name="Mangrove area" stroke="#3d5a4a" strokeWidth={2} dot />
-          <Line dataKey="fish" name="Fish biomass" stroke="#5c1a1a" strokeWidth={2} dot />
-          <Line dataKey="soil" name="Soil carbon" stroke="#a04525" strokeWidth={2} dot />
+          <Line dataKey="fish" name="Fish capture" stroke="#5c1a1a" strokeWidth={2} dot />
         </LineChart>
       </ResponsiveContainer>
     </div>

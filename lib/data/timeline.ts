@@ -1,7 +1,7 @@
 export type TimelineEvent = {
   year: number;
   title: string;
-  description: string;
+  body: string;
   category:
     | "colonization"
     | "extraction"
@@ -14,7 +14,7 @@ export const timelineEvents: TimelineEvent[] = [
   {
     year: 1960,
     title: "Placeholder event",
-    description: "Placeholder description.",
+    body: "Placeholder description.",
     category: "politics",
   },
 ];
