@@ -2,7 +2,8 @@ export const senegalRegimes = [
   {
     type: "postcolonial",
     leader: "Placeholder leader",
-    period: "1960–present",
+    start: 1960,
+    end: "present",
     notes: "Placeholder notes.",
   },
 ];
