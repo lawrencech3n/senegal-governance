@@ -7,8 +7,8 @@ export const envIndicators = [
 
 export const environmentalImpacts = [
   {
+    driver: "Resource extraction",
     title: "Environmental Impact",
-    category: "Placeholder category",
     body: "Placeholder body text.",
   },
 ];
