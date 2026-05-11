@@ -1,1 +1,2 @@
-export const regionsData = [];
+export const regions = [];
+export const extractionSites = [];
