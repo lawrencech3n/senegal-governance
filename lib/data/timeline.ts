@@ -13,5 +13,3 @@ export const timelineEvents: TimelineEvent[] = [
     category: "policy",
   },
 ];
-
-import { timelineEvents, type TimelineEvent } from "@/lib/data/timeline";
