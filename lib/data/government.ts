@@ -4,7 +4,7 @@ export const senegalRegimes = [
     leader: "Placeholder leader",
     start: 1960,
     end: "present",
-    notes: "Placeholder notes.",
+    note: "Placeholder note.",
   },
 ];
 
