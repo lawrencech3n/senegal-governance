@@ -1,1 +1,1 @@
-export const timelineData = [];
+export const timelineEvents = [];
