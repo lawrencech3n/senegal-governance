@@ -17,8 +17,9 @@ export const exportDestinations2020 = [
 export const majorOperators = [
   {
     name: "Placeholder operator",
-    sector: "Mining",
     origin: "France",
-    role: "Placeholder role",
+    resource: "Phosphates",
+    era: "Colonial / postcolonial",
+    notes: "Placeholder notes.",
   },
 ];
