@@ -21,5 +21,6 @@ export const conflicts = [
     name: "Placeholder conflict",
     note: "Placeholder note.",
     body: "Placeholder body text.",
+    intensity: "medium",
   },
 ];
