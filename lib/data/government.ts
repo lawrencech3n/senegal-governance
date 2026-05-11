@@ -17,8 +17,9 @@ export const regionalComparison = [
 
 export const conflicts = [
   {
-    title: "Placeholder conflict",
-    period: "Placeholder period",
+    year: 1960,
+    name: "Placeholder conflict",
+    note: "Placeholder note.",
     body: "Placeholder body text.",
   },
 ];
