@@ -1,3 +1,4 @@
+// timeline data
 export type TimelineEvent = {
   year: number;
   title: string;
