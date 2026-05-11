@@ -1,7 +1,7 @@
 export type TimelineEvent = {
   year: number;
   title: string;
-  description: string;
+  description: strin;
   category: "colonization" | "extraction" | "resistance" | "policy";
 };
 
