@@ -1,1 +1,1 @@
-export const cultureData = [];
+export const cultureThemes = [];
