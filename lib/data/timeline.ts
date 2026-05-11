@@ -1,5 +1,3 @@
-//update
-
 export type TimelineEvent = {
   year: number;
   title: string;
@@ -15,3 +13,5 @@ export const timelineEvents: TimelineEvent[] = [
     category: "policy",
   },
 ];
+
+import { timelineEvents, type TimelineEvent } from "@/lib/data/timeline";
