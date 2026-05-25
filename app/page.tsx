@@ -35,7 +35,7 @@ export default function Home() {
     <div className="space-y-20">
       {/* Act I — Stakes */}
       <section className="relative max-w-4xl">
-        <div className="teranga-band absolute -left-6 top-0 bottom-0 w-1 rounded-full" aria-hidden />
+        <div className="absolute -left-6 top-0 bottom-0 w-1 rounded-full bg-rust/30" aria-hidden />
         <p className="text-xs uppercase tracking-[0.3em] text-rust mb-3">
           ECON 30 Capstone · Progress &amp; Inequality · Spring 2026
         </p>
@@ -138,7 +138,7 @@ export default function Home() {
         </ul>
       </section>
 
-      <section className="teranga-band border border-ink/15 bg-parchment/60 p-8 md:p-10 max-w-3xl text-center mx-auto">
+      <section className="border border-ink/15 bg-parchment/60 p-8 md:p-10 max-w-3xl text-center mx-auto">
         <div className="text-xs uppercase tracking-[0.25em] text-rust mb-3">
           Remember one line
         </div>

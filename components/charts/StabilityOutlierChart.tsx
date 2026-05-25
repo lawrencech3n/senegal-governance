@@ -61,7 +61,7 @@ export function StabilityOutlierChart() {
 
   return (
     <figure className="border border-ink/15 bg-parchment/50 overflow-hidden">
-      <header className="teranga-band px-5 py-4 border-b border-ink/10">
+      <header className="px-5 py-4 border-b border-ink/10">
         <h4 className="font-serif text-xl text-ink mb-1">
           The stability gap — Senegal vs. peers
         </h4>

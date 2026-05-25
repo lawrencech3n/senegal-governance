@@ -19,13 +19,15 @@ export function ColonialTransitionDiagram() {
         role="img"
         aria-label="Diagram showing phases from colonial trading posts through independence to peaceful alternations"
       >
-        <defs>
-          <pattern id="teranga-diamond" width="8" height="8" patternUnits="userSpaceOnUse">
-            <rect width="8" height="8" fill="#f5f1e8" />
-            <path d="M0 4 L4 0 L8 4 L4 8 Z" fill="#5c1a1a" fillOpacity="0.08" />
-          </pattern>
-        </defs>
-        <rect x="0" y="40" width="720" height="8" fill="url(#teranga-diamond)" />
+        <line
+          x1="0"
+          y1="44"
+          x2="720"
+          y2="44"
+          stroke="#1a1814"
+          strokeOpacity={0.15}
+          strokeWidth={2}
+        />
         {phases.map((p, i) => {
           const x = 20 + i * 115;
           const fill =
