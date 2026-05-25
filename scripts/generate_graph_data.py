@@ -4,8 +4,6 @@ Generate static TS data for charts from public datasets.
 
 Outputs:
 - lib/data/government.ts
-- lib/data/extraction.ts
-- lib/data/environment.ts
 """
 
 from __future__ import annotations
@@ -165,6 +163,20 @@ def main() -> None:
     # Regime list (for leader cards)
     senegal_regimes = [
         {
+            "type": "colonial",
+            "leader": "French West Africa (AOF)",
+            "start": 1895,
+            "end": 1958,
+            "note": "Senegal as administrative center of the federation; indigénat, assimilationist law, and extractive political economy under Paris.",
+        },
+        {
+            "type": "colonial",
+            "leader": "Mali Federation (with French Sudan)",
+            "start": 1959,
+            "end": 1960,
+            "note": "Brief federal experiment; collapse over federal power-sharing foreshadows Senegal's insistence on a unitary, Dakar-centered state.",
+        },
+        {
             "type": "postcolonial",
             "leader": "Léopold Sédar Senghor",
             "start": 1960,
@@ -198,6 +210,29 @@ def main() -> None:
             "start": 2024,
             "end": "present",
             "note": "Elected in 2024 on an anti-corruption, reform platform; governs alongside PM Ousmane Sonko.",
+        },
+    ]
+
+    governance_hypotheses = [
+        {
+            "title": "Colonial state-building",
+            "body": "Senegal had a longer, more centralized French administration than many neighbors — and Dakar was the capital of French West Africa. The bureaucracy, courts, and party system did not have to be invented at independence.",
+        },
+        {
+            "title": "Elite continuity & managed pluralism",
+            "body": "Senghor and Diouf ruled through parties and elections rather than pure military dictatorship. Opposition was often co-opted or constrained, but violent regime change was rare — lowering coup incentives compared to Mali or Guinea.",
+        },
+        {
+            "title": "Sufi brotherhoods",
+            "body": "The Mourides, Tijaniyya, and other orders mediate between state and society. Scholars argue they channel dissent and discourage radical alternatives — a social structure less present in more fractured polities.",
+        },
+        {
+            "title": "Relative ethnic cohesion",
+            "body": "Wolof plurality is large but not overwhelming; Senegal lacks the sharp ethnic arithmetic of some neighbors. Casamance is the main exception — and that is where most armed conflict has been concentrated.",
+        },
+        {
+            "title": "French security & Françafrique",
+            "body": "Continued French military presence, aid, and informal influence may have discouraged putsches and rewarded cooperative leaders. The same ties are criticized as limiting true sovereignty.",
         },
     ]
 
@@ -245,6 +280,9 @@ export const senegalRegimes: SenegalRegime[] = {fmt_ts(senegal_regimes, indent=2
 export const regionalComparison: {{ country: string; coups: number; yearsOfWar: number }}[] =
   {fmt_ts(regional_comparison, indent=2)};
 
+export const governanceHypotheses: {{ title: string; body: string }}[] =
+  {fmt_ts(governance_hypotheses, indent=2)};
+
 export const conflicts: {{
   year: number;
   name: string;
@@ -254,144 +292,9 @@ export const conflicts: {{
 }}[] = {fmt_ts(conflicts, indent=2)};
 """
 
-    # --- Extraction: World Bank export composition ---
-    # Total merchandise exports (current US$)
-    total = world_bank_series("SEN", "TX.VAL.MRCH.CD.WT")
-    shares = {
-        "fuel": world_bank_series("SEN", "TX.VAL.FUEL.ZS.UN"),
-        "oresMetals": world_bank_series("SEN", "TX.VAL.MMTL.ZS.UN"),
-        "food": world_bank_series("SEN", "TX.VAL.FOOD.ZS.UN"),
-        "agriRaw": world_bank_series("SEN", "TX.VAL.AGRI.ZS.UN"),
-    }
-
-    years = sorted(set(total.keys()) & set(shares["fuel"].keys()) & set(shares["oresMetals"].keys()) & set(shares["food"].keys()) & set(shares["agriRaw"].keys()))
-    exports_by_year = []
-    for y in years:
-        t = total[y]
-        def val(pct: float) -> float:
-            return (t * pct / 100.0) / 1_000_000.0  # USD -> USD millions
-        exports_by_year.append(
-            {
-                "year": y,
-                "totalUsdM": round(t / 1_000_000.0, 2),
-                "fuelUsdM": round(val(shares["fuel"][y]), 2),
-                "oresMetalsUsdM": round(val(shares["oresMetals"][y]), 2),
-                "foodUsdM": round(val(shares["food"][y]), 2),
-                "agriRawUsdM": round(val(shares["agriRaw"][y]), 2),
-            }
-        )
-
-    # 2020 composition (fallback to nearest year if missing)
-    comp_year = 2020 if 2020 in total else years[-1]
-    t = total[comp_year]
-    comp_2020 = [
-        {"category": "Fuel", "usdM": round((t * shares["fuel"][comp_year] / 100.0) / 1_000_000.0, 2)},
-        {"category": "Ores & metals", "usdM": round((t * shares["oresMetals"][comp_year] / 100.0) / 1_000_000.0, 2)},
-        {"category": "Food", "usdM": round((t * shares["food"][comp_year] / 100.0) / 1_000_000.0, 2)},
-        {"category": "Agricultural raw materials", "usdM": round((t * shares["agriRaw"][comp_year] / 100.0) / 1_000_000.0, 2)},
-    ]
-
-    extraction_ts = f"""\
-export type ExportCategoryPoint = {{
-  year: number;
-  totalUsdM: number;
-  fuelUsdM: number;
-  oresMetalsUsdM: number;
-  foodUsdM: number;
-  agriRawUsdM: number;
-}};
-
-// World Bank merchandise exports (current US$) and composition shares.
-// Total: TX.VAL.MRCH.CD.WT
-// Shares: TX.VAL.FUEL.ZS.UN, TX.VAL.MMTL.ZS.UN, TX.VAL.FOOD.ZS.UN, TX.VAL.AGRI.ZS.UN
-// API: https://api.worldbank.org/
-export const exportsByCategoryByYear: ExportCategoryPoint[] = {fmt_ts(exports_by_year, indent=2)};
-
-export const exportComposition2020: {{ category: string; usdM: number }}[] = {fmt_ts(comp_2020, indent=2)};
-
-export const majorOperators: {{
-  name: string;
-  origin: string;
-  resource: string;
-  era: string;
-  notes: string;
-}}[] = [
-  {{
-    name: "Industries Chimiques du Sénégal (ICS)",
-    origin: "Senegal / multinational ownership",
-    resource: "Phosphates & fertilizer",
-    era: "Postcolonial",
-    notes: "One of Senegal’s largest industrial groups; operates phosphate mining and fertilizer production around Taïba and Darou.",
-  }},
-  {{
-    name: "Sabodala-Massawa (Endeavour Mining)",
-    origin: "Canada/UK-listed",
-    resource: "Gold",
-    era: "Postcolonial",
-    notes: "Large-scale gold mining in southeastern Senegal; among the country’s most significant modern extractive projects.",
-  }},
-];
-"""
-
-    # --- Environment: forest, fish capture (World Bank / FAO) ---
-    forest = world_bank_series("SEN", "AG.LND.FRST.ZS")  # % land area
-    fish = world_bank_series("SEN", "ER.FSH.CAPT.MT")  # metric tons
-
-    # Build combined env series on shared year domain (1990+)
-    env_years = sorted(set(forest.keys()) & set(fish.keys()))
-    # keep a reasonably sized set for the UI (annual is fine but can be long)
-    env_years = [y for y in env_years if 1990 <= y <= 2024]
-    env = []
-    for y in env_years:
-        env.append(
-            {
-                "year": y,
-                "forestCoverPct": round(forest[y], 2),
-                "fishCaptureMt": round(fish[y], 0),
-            }
-        )
-
-    environment_ts = f"""\
-export type EnvIndicator = {{
-  year: number;
-  forestCoverPct: number; // % of land area (World Bank / FAO)
-  fishCaptureMt: number; // metric tons (World Bank / FAO)
-}};
-
-// Forest area (% of land area): AG.LND.FRST.ZS
-// Fish capture production (metric tons): ER.FSH.CAPT.MT
-// World Bank API: https://api.worldbank.org/
-export const envIndicators: EnvIndicator[] = {fmt_ts(env, indent=2)};
-
-export const environmentalImpacts: {{
-  driver: string;
-  title: string;
-  body: string;
-}}[] = [
-  {{
-    driver: "Deforestation & fuelwood",
-    title: "Forest loss and fragmentation",
-    body: "Forest cover has declined steadily since 1990, reflecting agricultural expansion, charcoal production, and land pressure around growing cities.",
-  }},
-  {{
-    driver: "Coastal change",
-    title: "Mangroves under stress",
-    body: "Mangroves have faced long-term pressure from salinization, coastal erosion, and local wood harvesting; restoration projects can be locally significant even when national-level indicators move slowly.",
-  }},
-  {{
-    driver: "Fisheries",
-    title: "Rising pressure on fish stocks",
-    body: "Senegal’s coastal fisheries are heavily exploited; industrial and artisanal effort combined with foreign access agreements has raised sustainability concerns.",
-  }},
-];
-"""
-
-    # --- write outputs ---
     write_file("lib/data/government.ts", government_ts)
-    write_file("lib/data/extraction.ts", extraction_ts)
-    write_file("lib/data/environment.ts", environment_ts)
 
-    print("Wrote lib/data/government.ts, lib/data/extraction.ts, lib/data/environment.ts")
+    print("Wrote lib/data/government.ts")
 
 
 if __name__ == "__main__":

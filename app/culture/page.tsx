@@ -5,14 +5,17 @@ export default function CulturePage() {
     <div className="space-y-12">
       <header className="max-w-3xl">
         <div className="text-xs uppercase tracking-[0.3em] text-rust mb-3">
-          Section 06
+          Supporting argument
         </div>
-        <h2 className="font-serif text-5xl text-ink mb-4">Culture</h2>
+        <h2 className="font-serif text-5xl text-ink mb-4">
+          Institutional legacies
+        </h2>
         <p className="prose-serif text-ink/80">
-          Money and minerals are easy to count. The harder things to measure
-          are the institutions, languages, and habits of mind that the
-          colonial encounter left in place. This is the most subjective
-          section of the project, and the one with the longest tail.
+          Stability is not only elections and coups. Colonial and
+          post-colonial institutions — legal categories, currency, security
+          pacts — shaped who could rule and how challengers were absorbed or
+          suppressed. These legacies help explain why independence did not
+          produce the same ruptures as in Mali or Guinea.
         </p>
       </header>
 

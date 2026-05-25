@@ -501,7 +501,44 @@ export const vdemLibDemSenegal: VDemPoint[] = [
   }
 ];
 
+export const governanceHypotheses = [
+  {
+    title: "Colonial state-building",
+    body: "Senegal had a longer, more centralized French administration than many neighbors — and Dakar was the capital of French West Africa. The bureaucracy, courts, and party system did not have to be invented at independence.",
+  },
+  {
+    title: "Elite continuity & managed pluralism",
+    body: "Senghor and Diouf ruled through parties and elections rather than pure military dictatorship. Opposition was often co-opted or constrained, but violent regime change was rare — lowering coup incentives compared to Mali or Guinea.",
+  },
+  {
+    title: "Sufi brotherhoods",
+    body: "The Mourides, Tijaniyya, and other orders mediate between state and society. Scholars argue they channel dissent and discourage radical alternatives — a social structure less present in more fractured polities.",
+  },
+  {
+    title: "Relative ethnic cohesion",
+    body: "Wolof plurality is large but not overwhelming; Senegal lacks the sharp ethnic arithmetic of some neighbors. Casamance is the main exception — and that is where most armed conflict has been concentrated.",
+  },
+  {
+    title: "French security & Françafrique",
+    body: "Continued French military presence, aid, and informal influence may have discouraged putsches and rewarded cooperative leaders. The same ties are criticized as limiting true sovereignty.",
+  },
+];
+
 export const senegalRegimes: SenegalRegime[] = [
+  {
+    type: "colonial",
+    leader: "French West Africa (AOF)",
+    start: 1895,
+    end: 1958,
+    note: "Senegal as administrative center of the federation; indigénat, assimilationist law, and extractive political economy under Paris.",
+  },
+  {
+    type: "colonial",
+    leader: "Mali Federation (with French Sudan)",
+    start: 1959,
+    end: 1960,
+    note: "Brief federal experiment; collapse over federal power-sharing foreshadows Senegal's insistence on a unitary, Dakar-centered state.",
+  },
   {
     "type": "postcolonial",
     "leader": "Léopold Sédar Senghor",
