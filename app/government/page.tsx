@@ -234,7 +234,7 @@ export default function GovernmentPage() {
       </section>
 
       <section className="space-y-4 max-w-3xl">
-        <h3 className="font-serif text-3xl text-ink">What this does not prove</h3>
+        <h3 className="font-serif text-3xl text-ink">Limits &amp; counterpoints</h3>
         <ul className="space-y-3">
           {counterpoints.map((c) => (
             <li key={c.title} className="border border-ink/10 p-4">

@@ -67,7 +67,7 @@ export default function Home() {
       <section className="grid lg:grid-cols-[1fr_1fr] gap-8 max-w-5xl">
         <article className="border border-ink/15 bg-parchment/50 p-6 md:p-8 space-y-4">
           <div className="text-xs uppercase tracking-[0.2em] text-rust">
-            Argument (defensible, not proven)
+            Argument
           </div>
           <p className="text-sm text-ink/80 leading-relaxed">{mainArgument.claim}</p>
           <p className="text-sm text-ink/70 leading-relaxed italic border-t border-ink/10 pt-4">

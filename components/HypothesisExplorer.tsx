@@ -22,8 +22,7 @@ export function HypothesisExplorer() {
           Explore the explanations
         </h4>
         <p className="text-sm text-ink/70">
-          Select a hypothesis. The bar shows how well this site can test it with
-          available data — not how true it is in the literature.
+          Select a hypothesis to see what evidence this project brings to bear.
         </p>
       </div>
       <div

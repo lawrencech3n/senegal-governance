@@ -534,7 +534,7 @@ export const governanceHypotheses = [
     title: "French security & Françafrique",
     strength: "moderate" as const,
     body: "Continued French military presence, aid, and informal influence may have discouraged putsches and rewarded cooperative leaders. The same ties are criticized as limiting true sovereignty.",
-    evidence: "Legacies section; comparison chart shows neighbors with weaker French ties had more coups — correlation, not proof.",
+    evidence: "Legacies section; comparison chart shows neighbors with weaker French ties had more coups.",
     chartLink: "/culture",
   },
 ];
