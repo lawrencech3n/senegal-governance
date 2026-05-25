@@ -505,22 +505,32 @@ export const governanceHypotheses = [
   {
     title: "Colonial state-building",
     body: "Senegal had a longer, more centralized French administration than many neighbors — and Dakar was the capital of French West Africa. The bureaucracy, courts, and party system did not have to be invented at independence.",
+    evidence: "Colonial regime cards; V-Dem shows pre-built administrative capacity before 1960.",
+    chartLink: "#colonial",
   },
   {
     title: "Elite continuity & managed pluralism",
     body: "Senghor and Diouf ruled through parties and elections rather than pure military dictatorship. Opposition was often co-opted or constrained, but violent regime change was rare — lowering coup incentives compared to Mali or Guinea.",
+    evidence: "Zero successful coups since 1960; peaceful alternations in 2000 and 2012 on the timeline.",
+    chartLink: "#democracy",
   },
   {
     title: "Sufi brotherhoods",
     body: "The Mourides, Tijaniyya, and other orders mediate between state and society. Scholars argue they channel dissent and discourage radical alternatives — a social structure less present in more fractured polities.",
+    evidence: "Qualitative literature (Diouf); harder to test quantitatively — noted as a limit.",
+    chartLink: "/culture",
   },
   {
     title: "Relative ethnic cohesion",
     body: "Wolof plurality is large but not overwhelming; Senegal lacks the sharp ethnic arithmetic of some neighbors. Casamance is the main exception — and that is where most armed conflict has been concentrated.",
+    evidence: "Casamance conflict since 1982; most other violence episodic compared to neighbors' war years.",
+    chartLink: "#violence",
   },
   {
     title: "French security & Françafrique",
     body: "Continued French military presence, aid, and informal influence may have discouraged putsches and rewarded cooperative leaders. The same ties are criticized as limiting true sovereignty.",
+    evidence: "Legacies section; comparison chart shows neighbors with weaker French ties had more coups — correlation, not proof.",
+    chartLink: "/culture",
   },
 ];
 

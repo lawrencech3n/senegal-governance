@@ -11,7 +11,8 @@ export default function TimelinePage() {
         <p className="prose-serif text-ink/80">
           Milestones in how Senegal was governed — from the first French posts
           through federation, independence, and the tests of the 21st century.
-          Colors mark colonization, politics, war, and post-colonial change.
+          Use the category filters to isolate colonial foundations, political
+          transitions, and episodes of violence.
         </p>
       </header>
 

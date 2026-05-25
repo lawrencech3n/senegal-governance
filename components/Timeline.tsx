@@ -20,19 +20,74 @@ const categoryLabel: Record<TimelineEvent["category"], string> = {
   "post-colonial": "Post-colonial",
 };
 
+const allCategories = Object.keys(categoryLabel) as TimelineEvent["category"][];
+
 export function Timeline() {
-  const sorted = useMemo(
+  const sortedAll = useMemo(
     () => [...timelineEvents].sort((a, b) => a.year - b.year),
     [],
   );
-  const [activeIdx, setActiveIdx] = useState<number>(sorted.length - 1);
-  const minYear = sorted[0].year;
-  const maxYear = sorted[sorted.length - 1].year;
-  const active = sorted[activeIdx];
+
+  const [filter, setFilter] = useState<TimelineEvent["category"] | "all">(
+    "all",
+  );
+  const sorted = useMemo(
+    () =>
+      filter === "all"
+        ? sortedAll
+        : sortedAll.filter((e) => e.category === filter),
+    [sortedAll, filter],
+  );
+
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  const safeIdx = Math.min(activeIdx, Math.max(0, sorted.length - 1));
+  const minYear = sortedAll[0]?.year ?? 1659;
+  const maxYear = sortedAll[sortedAll.length - 1]?.year ?? 2024;
+  const active = sorted[safeIdx] ?? sortedAll[0];
+
+  const toggleFilter = (cat: TimelineEvent["category"] | "all") => {
+    setFilter(cat);
+    setActiveIdx(0);
+  };
 
   return (
     <div className="space-y-8">
-      {/* Track */}
+      <p className="text-sm text-ink/70 max-w-2xl">
+        Filter by type to see how colonial rule, political transitions, and
+        violence cluster — or click any dot to read an event. The arc from
+        colonization to post-colonial alternations is the governance story.
+      </p>
+
+      <div className="flex flex-wrap gap-2" role="group" aria-label="Filter timeline by category">
+        <button
+          onClick={() => toggleFilter("all")}
+          className={`text-xs px-3 py-1.5 border transition ${
+            filter === "all"
+              ? "bg-ink text-parchment border-ink"
+              : "border-ink/30 text-ink/70 hover:border-ink"
+          }`}
+        >
+          All events
+        </button>
+        {allCategories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => toggleFilter(cat)}
+            className={`text-xs px-3 py-1.5 border transition flex items-center gap-1.5 ${
+              filter === cat
+                ? "bg-ink text-parchment border-ink"
+                : "border-ink/30 text-ink/70 hover:border-ink"
+            }`}
+          >
+            <span
+              className={`inline-block w-2 h-2 rounded-full ${categoryColor[cat]}`}
+            />
+            {categoryLabel[cat]}
+          </button>
+        ))}
+      </div>
+
       <div className="relative pt-10 pb-16">
         <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px bg-ink/20" />
         <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex justify-between text-xs text-ink/50">
@@ -43,7 +98,7 @@ export function Timeline() {
         <div className="relative h-16">
           {sorted.map((event, idx) => {
             const pct = ((event.year - minYear) / (maxYear - minYear)) * 100;
-            const isActive = idx === activeIdx;
+            const isActive = idx === safeIdx;
             return (
               <button
                 key={event.year + event.title}
@@ -51,6 +106,7 @@ export function Timeline() {
                 style={{ left: `${pct}%` }}
                 className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 group"
                 aria-label={`${event.year} — ${event.title}`}
+                aria-pressed={isActive}
               >
                 <span
                   className={`block rounded-full border border-ink/30 transition-all ${
@@ -59,7 +115,9 @@ export function Timeline() {
                 />
                 <span
                   className={`absolute top-7 left-1/2 -translate-x-1/2 text-xs whitespace-nowrap transition-opacity ${
-                    isActive ? "opacity-100 text-ink" : "opacity-0 group-hover:opacity-70 text-ink/70"
+                    isActive
+                      ? "opacity-100 text-ink"
+                      : "opacity-0 group-hover:opacity-70 text-ink/70"
                   }`}
                 >
                   {event.year}
@@ -70,7 +128,6 @@ export function Timeline() {
         </div>
       </div>
 
-      {/* Active card */}
       <AnimatePresence mode="wait">
         <motion.div
           key={active.year + active.title}
@@ -95,27 +152,21 @@ export function Timeline() {
 
       <div className="flex flex-wrap gap-2">
         <button
-          onClick={() => setActiveIdx(Math.max(0, activeIdx - 1))}
-          disabled={activeIdx === 0}
+          onClick={() => setActiveIdx(Math.max(0, safeIdx - 1))}
+          disabled={safeIdx === 0}
           className="text-xs uppercase tracking-[0.2em] px-3 py-2 border border-ink/30 hover:bg-ink hover:text-parchment transition disabled:opacity-30"
         >
           ← Prev
         </button>
         <button
-          onClick={() => setActiveIdx(Math.min(sorted.length - 1, activeIdx + 1))}
-          disabled={activeIdx === sorted.length - 1}
+          onClick={() =>
+            setActiveIdx(Math.min(sorted.length - 1, safeIdx + 1))
+          }
+          disabled={safeIdx >= sorted.length - 1}
           className="text-xs uppercase tracking-[0.2em] px-3 py-2 border border-ink/30 hover:bg-ink hover:text-parchment transition disabled:opacity-30"
         >
           Next →
         </button>
-        <div className="ml-auto flex gap-3 text-xs text-ink/60 items-center">
-          {Object.entries(categoryLabel).map(([k, v]) => (
-            <span key={k} className="flex items-center gap-1.5">
-              <span className={`inline-block w-2.5 h-2.5 rounded-full ${categoryColor[k as TimelineEvent["category"]]}`} />
-              {v}
-            </span>
-          ))}
-        </div>
       </div>
     </div>
   );

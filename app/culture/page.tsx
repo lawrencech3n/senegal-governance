@@ -15,7 +15,10 @@ export default function CulturePage() {
           post-colonial institutions — legal categories, currency, security
           pacts — shaped who could rule and how challengers were absorbed or
           suppressed. These legacies help explain why independence did not
-          produce the same ruptures as in Mali or Guinea.
+          produce the same ruptures as in Mali or Guinea, and why{" "}
+          <strong className="font-medium text-ink">progress has been uneven</strong>
+          : continuity at the center did not automatically spread gains to
+          Casamance or rural Senegal.
         </p>
       </header>
 

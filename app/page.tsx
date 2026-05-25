@@ -1,4 +1,12 @@
 import Link from "next/link";
+import {
+  researchQuestion,
+  mainArgument,
+  progressLens,
+  counterpoints,
+  takeaway,
+  readingPath,
+} from "@/lib/data/narrative";
 
 const sections = [
   {
@@ -22,49 +30,79 @@ export default function Home() {
   return (
     <div className="space-y-16">
       <section className="max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.3em] text-rust mb-3">
-          Senegal · colonial rule → independence → today
-        </div>
+        <p className="text-xs uppercase tracking-[0.3em] text-rust mb-3">
+          ECON 30 Capstone · Progress &amp; Inequality · Spring 2026
+        </p>
         <h2 className="font-serif text-5xl md:text-6xl leading-[1.05] text-ink mb-6">
-          Why didn&apos;t Senegal experience as much political instability as
-          neighboring countries?
+          {researchQuestion}
         </h2>
         <p className="prose-serif text-ink/80">
-          Mali, Guinea, Burkina Faso, and Mauritania have seen repeated coups,
-          civil wars, or state collapse. Senegal — independent the same year,
-          under the same colonial power — has had no successful military coup,
-          three peaceful transfers of power at the ballot box, and only one
-          major low-intensity conflict (Casamance). This project traces{" "}
-          <strong className="font-medium text-ink">governance</strong> under
-          French rule and after independence, then tests the usual explanations
-          against data.
+          Mali, Guinea, Burkina Faso, and Mauritania — independent the same
+          decade, under the same colonial power — have seen repeated coups, civil
+          wars, or state collapse. Senegal has had{" "}
+          <strong className="font-medium text-ink">no successful military coup</strong>
+          , three peaceful transfers of power at the ballot box, and one major
+          low-intensity conflict (Casamance). This site asks why the paths
+          diverged, and what that divergence means for long-run progress.
         </p>
       </section>
 
-      <section className="border border-ink/15 bg-parchment/50 p-6 md:p-8 max-w-3xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-rust mb-2">
+      <section className="border border-ink/15 bg-parchment/50 p-6 md:p-8 max-w-3xl space-y-4">
+        <div className="text-xs uppercase tracking-[0.2em] text-rust">
           Research question
         </div>
         <p className="font-serif text-2xl text-ink leading-snug">
-          Why didn&apos;t Senegal experience as much political instability as
-          neighboring countries?
+          {researchQuestion}
         </p>
-        <p className="text-sm text-ink/70 mt-4 leading-relaxed">
-          The site does not claim a single answer. It maps colonial and
-          post-colonial institutions, compares Senegal to peer states on coups
-          and armed conflict, and lays out hypotheses scholars and policymakers
-          debate — from Sufi mediation and ethnic structure to French security
-          ties and elite-managed pluralism.
+        <div className="border-t border-ink/10 pt-4">
+          <div className="text-xs uppercase tracking-[0.2em] text-ink/60 mb-2">
+            Argument (defensible, not proven)
+          </div>
+          <p className="text-sm text-ink/80 leading-relaxed">
+            {mainArgument.claim}
+          </p>
+          <p className="text-sm text-ink/70 leading-relaxed mt-3 italic">
+            Mechanism: {mainArgument.mechanism}
+          </p>
+        </div>
+      </section>
+
+      <section className="max-w-3xl space-y-4">
+        <h3 className="font-serif text-3xl text-ink">{progressLens.title}</h3>
+        {progressLens.paragraphs.map((p) => (
+          <p key={p.slice(0, 40)} className="prose-serif text-ink/80">
+            {p}
+          </p>
+        ))}
+        <p className="text-sm border-l-4 border-ochre pl-4 text-ink/75">
+          <span className="font-medium text-ink">Who gains: </span>
+          {progressLens.whoGains}
         </p>
-        <Link
-          href="/government"
-          className="inline-block mt-5 text-xs uppercase tracking-[0.25em] text-rust hover:text-ink transition-colors"
-        >
-          Start with governance →
-        </Link>
       </section>
 
       <div className="divider-rule" />
+
+      <section className="space-y-6">
+        <h3 className="font-serif text-3xl text-ink">How to read this site</h3>
+        <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 list-none">
+          {readingPath.map((step) => (
+            <li key={step.step}>
+              <Link
+                href={step.href}
+                className="block h-full border border-ink/15 bg-parchment/40 p-4 hover:border-rust transition"
+              >
+                <div className="font-serif text-3xl text-rust mb-1">
+                  {step.step}
+                </div>
+                <div className="font-serif text-lg text-ink mb-1">
+                  {step.title}
+                </div>
+                <p className="text-xs text-ink/65">{step.body}</p>
+              </Link>
+            </li>
+          ))}
+        </ol>
+      </section>
 
       <section className="grid md:grid-cols-3 gap-6">
         {sections.map((s) => (
@@ -84,15 +122,44 @@ export default function Home() {
         ))}
       </section>
 
-      <section className="max-w-3xl space-y-4 text-ink/70">
-        <h3 className="font-serif text-2xl text-ink">Method</h3>
-        <p className="prose-serif">
-          Coup counts come from the CAM dataset; years with organized armed
-          conflict from UCDP via Our World in Data; democratic deepening from
-          V-Dem. Colonial narrative draws on standard histories of AOF and
-          Senegalese party politics. Figures are for exploration, not
-          peer-reviewed claims.
+      <section className="space-y-4 max-w-3xl">
+        <h3 className="font-serif text-3xl text-ink">Limits &amp; counterpoints</h3>
+        <p className="text-sm text-ink/70">
+          A strong argument acknowledges what it cannot explain:
         </p>
+        <ul className="space-y-3">
+          {counterpoints.map((c) => (
+            <li
+              key={c.title}
+              className="border border-ink/10 bg-parchment/30 p-4"
+            >
+              <div className="font-medium text-ink text-sm">{c.title}</div>
+              <p className="text-sm text-ink/70 mt-1">{c.body}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="border-l-4 border-oxblood pl-6 max-w-3xl py-2">
+        <div className="text-xs uppercase tracking-[0.2em] text-rust mb-2">
+          Takeaway
+        </div>
+        <p className="font-serif text-2xl text-ink leading-snug">{takeaway}</p>
+      </section>
+
+      <section className="max-w-3xl space-y-2 text-sm text-ink/60">
+        <h3 className="font-serif text-xl text-ink">About this project</h3>
+        <p>
+          Built for ECON 30 at Stanford. The interactive comparison charts and
+          timeline are meant to test one comparative question — not to summarize
+          all of Senegalese history. Data: V-Dem, UCDP, CAM coups dataset.
+        </p>
+        <Link
+          href="/government"
+          className="inline-block text-xs uppercase tracking-[0.25em] text-rust hover:text-ink pt-2"
+        >
+          Start with the evidence →
+        </Link>
       </section>
     </div>
   );
