@@ -20,6 +20,44 @@ const categoryLabel: Record<TimelineEvent["category"], string> = {
 
 const allCategories = Object.keys(categoryLabel) as TimelineEvent["category"][];
 
+type PhasePreset = {
+  id: string;
+  label: string;
+  filter: TimelineEvent["category"] | "all";
+  yearMin?: number;
+  yearMax?: number;
+  description: string;
+};
+
+const phasePresets: PhasePreset[] = [
+  {
+    id: "all",
+    label: "Full timeline",
+    filter: "all",
+    description: "Every milestone from 1659 to today.",
+  },
+  {
+    id: "colonial",
+    label: "Colonial arc",
+    filter: "colonization",
+    description: "How France built administrative capacity in Senegal.",
+  },
+  {
+    id: "independence",
+    label: "Independence arc",
+    filter: "politics",
+    yearMin: 1944,
+    yearMax: 1963,
+    description: "The negotiated path from Brazzaville to republic (1944–1963).",
+  },
+  {
+    id: "tests",
+    label: "Post-1960 tests",
+    filter: "post-colonial",
+    description: "Alternations, Casamance, and 21st-century stress.",
+  },
+];
+
 export function Timeline() {
   const sortedAll = useMemo(
     () => [...timelineEvents].sort((a, b) => a.year - b.year),
@@ -29,12 +67,18 @@ export function Timeline() {
   const [filter, setFilter] = useState<TimelineEvent["category"] | "all">(
     "all",
   );
+  const [yearRange, setYearRange] = useState<{ min?: number; max?: number }>(
+    {},
+  );
   const sorted = useMemo(
     () =>
-      filter === "all"
-        ? sortedAll
-        : sortedAll.filter((e) => e.category === filter),
-    [sortedAll, filter],
+      sortedAll.filter((e) => {
+        if (filter !== "all" && e.category !== filter) return false;
+        if (yearRange.min != null && e.year < yearRange.min) return false;
+        if (yearRange.max != null && e.year > yearRange.max) return false;
+        return true;
+      }),
+    [sortedAll, filter, yearRange],
   );
 
   const [activeIdx, setActiveIdx] = useState(0);
@@ -46,21 +90,56 @@ export function Timeline() {
 
   const toggleFilter = (cat: TimelineEvent["category"] | "all") => {
     setFilter(cat);
+    setYearRange({});
     setActiveIdx(0);
   };
+
+  const applyPreset = (preset: PhasePreset) => {
+    setFilter(preset.filter);
+    setYearRange(
+      preset.yearMin != null || preset.yearMax != null
+        ? { min: preset.yearMin, max: preset.yearMax }
+        : {},
+    );
+    setActiveIdx(0);
+  };
+
+  const activePreset =
+    phasePresets.find(
+      (p) =>
+        p.filter === filter &&
+        p.yearMin === yearRange.min &&
+        p.yearMax === yearRange.max,
+    )?.id ?? (filter === "all" && !yearRange.min ? "all" : null);
 
   return (
     <div className="space-y-8">
       <p className="text-sm text-ink/70 max-w-2xl">
-        Filter by type to see how colonial rule, political transitions, and
-        violence cluster — or click any dot to read an event. The arc from
-        colonization to post-colonial alternations is the governance story.
+        Start with a phase preset to follow the argument — colonial foundations,
+        the independence arc, or post-1960 tests — then click any dot for detail.
       </p>
+
+      <div className="flex flex-wrap gap-2" role="group" aria-label="Timeline phase presets">
+        {phasePresets.map((preset) => (
+          <button
+            key={preset.id}
+            onClick={() => applyPreset(preset)}
+            className={`text-xs px-3 py-2 border transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust ${
+              activePreset === preset.id
+                ? "bg-rust text-parchment border-rust"
+                : "border-ink/30 text-ink/70 hover:border-rust"
+            }`}
+            title={preset.description}
+          >
+            {preset.label}
+          </button>
+        ))}
+      </div>
 
       <div className="flex flex-wrap gap-2" role="group" aria-label="Filter timeline by category">
         <button
           onClick={() => toggleFilter("all")}
-          className={`text-xs px-3 py-1.5 border transition ${
+            className={`text-xs px-3 py-1.5 border transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust ${
             filter === "all"
               ? "bg-ink text-parchment border-ink"
               : "border-ink/30 text-ink/70 hover:border-ink"

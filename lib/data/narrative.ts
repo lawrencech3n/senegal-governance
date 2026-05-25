@@ -1,6 +1,14 @@
 export const researchQuestion =
   "What explains Senegal's relative political stability compared to neighboring Francophone states since independence?";
 
+export const stakes =
+  "In 1960, six Francophone West African states left the same empire. Within a generation, most had coups, civil wars, or both. Senegal did not — and that divergence shaped who could invest, migrate, and learn in peace.";
+
+export const originalInsight = {
+  title: "What this project adds",
+  body: "Most accounts treat Senegal as culturally exceptional or French-favored. This site tests a narrower, comparative claim: the same colonial power built different state capacity in Dakar than in Bamako or Conakry — and Senegalese elites negotiated continuity rather than rupture at independence. The gap in coups and conflict years (below) is the empirical hook; the colonial-to-republic sequence is the mechanism story.",
+};
+
 export const mainArgument = {
   claim:
     "Senegal's relative calm is not an accident of culture alone — it reflects a distinctive colonial inheritance (a strong Dakar-centered state), elite-managed politics after 1960, and social institutions that channel conflict — but that stability has limits and has not guaranteed broad economic progress.",
@@ -8,14 +16,23 @@ export const mainArgument = {
     "Institutional continuity lowered the payoff to military seizure of power while keeping enough space for negotiated succession — a pattern rare among peers who inherited weaker bureaucracies and sharper elite fractures.",
 };
 
+export const authorSynthesis =
+  "If I had to weight the evidence on this site, colonial state-building and negotiated transition matter most for explaining the coup gap; Sufi mediation and Françafrique matter for explaining why violence stayed peripheral (Casamance) rather than national. None of that makes Senegal a model for growth — it bought time for partial progress while leaving inequality and youth unemployment unresolved.";
+
 export const progressLens = {
   title: "Why this matters for progress",
-  paragraphs: [
-    "Political instability is one of the clearest brakes on long-run development. Coups and civil wars destroy capital, interrupt schooling, and push talent abroad. In progress-studies terms, Senegal's record matters because it kept the institutional floor intact long enough for partial gains in health, education, and urbanization — even when growth disappointed.",
-    "The comparison is not a victory lap. Senegal remains a lower-middle-income country with high youth unemployment and deep regional inequality (Dakar vs. Casamance). Stability enabled some mobility and investment; it did not erase inequality. The question is whether the same mechanisms that prevented coups also slowed reform.",
-  ],
+  bottleneck:
+    "Political instability destroys the institutional floor — schools close, capital flees, and reform stops. Senegal's comparative advantage was keeping that floor intact.",
+  engine:
+    "Continuity let health, education, and urbanization advance in Dakar even when GDP growth disappointed. The engine was institutional persistence, not resource windfalls.",
   whoGains:
-    "Urban Francophone elites and export-linked sectors benefited most from continuity; rural and southern populations have seen slower convergence — visible in where conflict actually occurred.",
+    "Urban Francophone elites and export-linked sectors benefited most; rural and Casamance populations saw slower convergence — conflict maps onto periphery, not center.",
+  futureLearning:
+    "For progress studies: stability is a necessary but insufficient condition. The 2021–2024 stress tests ask whether Senegal can renew its settlement without repeating neighbors' ruptures — or whether managed politics will finally exhaust reform capacity.",
+  paragraphs: [
+    "Political instability is one of the clearest brakes on long-run development. Coups and civil wars destroy capital, interrupt schooling, and push talent abroad. Senegal kept the institutional floor intact long enough for partial gains in health, education, and urbanization — even when growth disappointed.",
+    "The comparison is not a victory lap. Senegal remains a lower-middle-income country with high youth unemployment and deep regional inequality. The question is whether the same mechanisms that prevented coups also slowed structural reform.",
+  ],
 };
 
 export const counterpoints = [
@@ -38,26 +55,26 @@ export const counterpoints = [
 ];
 
 export const takeaway =
-  "Senegal's quiet is real but relative: institutions inherited from colonial rule and managed after it kept the worst regional outcomes at bay — without yet solving the progress puzzle of shared prosperity.";
+  "Senegal's quiet is real but relative: inherited institutions and managed politics kept the worst regional outcomes at bay — without yet solving shared prosperity.";
 
 export const readingPath = [
   {
     step: 1,
     href: "/government",
     title: "Evidence",
-    body: "Compare coups and conflict data; read the V-Dem democracy trend.",
+    body: "Use the outlier chart and regional comparison — then trace colonial rule to alternation.",
   },
   {
     step: 2,
     href: "/timeline",
     title: "Sequence",
-    body: "See when colonial rule, independence, and alternations happened.",
+    body: "Filter the independence arc (1945–1963) to see negotiated exit.",
   },
   {
     step: 3,
     href: "/culture",
     title: "Mechanisms",
-    body: "Institutional legacies that outlasted 1960.",
+    body: "Legacies that bound Senegal to Paris after the flag changed.",
   },
   {
     step: 4,

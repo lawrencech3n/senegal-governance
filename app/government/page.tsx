@@ -1,14 +1,22 @@
 import Link from "next/link";
 import { RegimeChart } from "@/components/charts/RegimeChart";
 import { RegionalCompareChart } from "@/components/charts/RegionalCompareChart";
+import { StabilityOutlierChart } from "@/components/charts/StabilityOutlierChart";
+import { ColonialTransitionDiagram } from "@/components/ColonialTransitionDiagram";
 import { HypothesisExplorer } from "@/components/HypothesisExplorer";
+import { PageSynthesis } from "@/components/PageSynthesis";
 import {
   senegalRegimes,
   conflicts,
-  governanceHypotheses,
 } from "@/lib/data/government";
 import { colonialHistory, independenceTransition } from "@/lib/data/colonial";
-import { mainArgument, counterpoints, researchQuestion } from "@/lib/data/narrative";
+import {
+  mainArgument,
+  counterpoints,
+  researchQuestion,
+  authorSynthesis,
+  takeaway,
+} from "@/lib/data/narrative";
 
 export default function GovernmentPage() {
   const colonial = senegalRegimes.filter((r) => r.type === "colonial");
@@ -110,8 +118,9 @@ export default function GovernmentPage() {
           <Link href="/timeline" className="text-rust underline hover:text-ink">
             interactive timeline
           </Link>{" "}
-          — filter by &ldquo;Politics&rdquo; for the independence sequence.
+          — filter by &ldquo;Independence arc&rdquo; for the 1945–1963 sequence.
         </p>
+        <ColonialTransitionDiagram />
       </section>
 
       <section className="space-y-4" id="democracy">
@@ -195,11 +204,12 @@ export default function GovernmentPage() {
           6. Compared to neighbors
         </h3>
         <p className="prose-serif text-ink/80 max-w-3xl">
-          This is the core interactive comparison. Senegal (dark red) against
-          peer states on successful coups since 1960 and years with
-          UCDP-classified organized violence (1989–2024). The gap is the
-          empirical anchor for the research question.
+          The outlier chart quantifies the gap; the paired bars below show the
+          same countries side by side. Senegal (dark red) against peer states on
+          successful coups since 1960 and years with UCDP-classified organized
+          violence (1989–2024).
         </p>
+        <StabilityOutlierChart />
         <RegionalCompareChart />
       </section>
 
@@ -212,17 +222,15 @@ export default function GovernmentPage() {
           site. No single factor wins in the literature.
         </p>
         <HypothesisExplorer />
-        <div className="grid md:grid-cols-2 gap-4 pt-4">
-          {governanceHypotheses.map((h) => (
-            <article
-              key={h.title}
-              className="border border-ink/15 bg-parchment/50 p-5"
-            >
-              <h4 className="font-serif text-xl text-ink mb-2">{h.title}</h4>
-              <p className="text-sm text-ink/80 leading-relaxed">{h.body}</p>
-            </article>
-          ))}
+      </section>
+
+      <PageSynthesis>{authorSynthesis}</PageSynthesis>
+
+      <section className="border-l-4 border-ochre pl-6 max-w-3xl py-2">
+        <div className="text-xs uppercase tracking-[0.2em] text-rust mb-2">
+          Takeaway
         </div>
+        <p className="font-serif text-xl text-ink leading-snug">{takeaway}</p>
       </section>
 
       <section className="space-y-4 max-w-3xl">

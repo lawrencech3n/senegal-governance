@@ -30,7 +30,7 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <header className="border-b border-ink/15 bg-parchment/80 backdrop-blur-sm sticky top-0 z-40">
+        <header className="border-b border-ink/15 bg-parchment/80 backdrop-blur-sm sticky top-0 z-40 teranga-band">
           <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col md:flex-row md:items-end justify-between gap-3">
             <Link href="/" className="group">
               <p className="text-xs uppercase tracking-[0.3em] text-ink/60">

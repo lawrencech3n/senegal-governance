@@ -1,4 +1,5 @@
 import { Timeline } from "@/components/Timeline";
+import { PageSynthesis } from "@/components/PageSynthesis";
 
 export default function TimelinePage() {
   return (
@@ -11,12 +12,21 @@ export default function TimelinePage() {
         <p className="prose-serif text-ink/80">
           Milestones in how Senegal was governed — from coastal trading posts
           through federation, the negotiated path to independence, and the tests
-          of the 21st century. Use the category filters: Colonization for
-          imperial rule, Politics for the transition to self-government.
+          of the 21st century. Start with the{" "}
+          <strong className="font-medium text-ink">Independence arc</strong>{" "}
+          preset to see the 1944–1963 sequence that distinguishes Senegal from
+          Guinea&apos;s immediate rupture.
         </p>
       </header>
 
       <Timeline />
+
+      <PageSynthesis>
+        The timeline shows timing, not causation — but the clustering of
+        political milestones between 1946 and 1960 supports the claim that
+        Senegal exited through negotiation while peers inherited weaker centers
+        or sharper military fractures.
+      </PageSynthesis>
     </div>
   );
 }

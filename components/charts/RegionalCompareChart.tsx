@@ -9,10 +9,19 @@ import {
   Tooltip,
   ResponsiveContainer,
   Cell,
+  ReferenceLine,
 } from "recharts";
 import { regionalComparison } from "@/lib/data/government";
 
+function peerAverage(key: "coups" | "yearsOfWar") {
+  const peers = regionalComparison.filter((c) => c.country !== "Senegal");
+  return peers.reduce((s, c) => s + c[key], 0) / peers.length;
+}
+
 export function RegionalCompareChart() {
+  const avgCoups = peerAverage("coups");
+  const avgWar = peerAverage("yearsOfWar");
+
   return (
     <figure className="grid md:grid-cols-2 gap-4">
       <div className="h-[360px] border border-ink/15 bg-parchment/40 p-4">
@@ -55,6 +64,12 @@ export function RegionalCompareChart() {
                 fontSize: 12,
               }}
               formatter={(v: number) => [v, "Successful coups"]}
+            />
+            <ReferenceLine
+              y={avgCoups}
+              stroke="#c89c4a"
+              strokeDasharray="4 4"
+              label={{ value: `Avg ${avgCoups.toFixed(1)}`, fontSize: 9, fill: "#a04525" }}
             />
             <Bar dataKey="coups" name="Successful coups">
               {regionalComparison.map((c, i) => (
@@ -109,6 +124,12 @@ export function RegionalCompareChart() {
                 fontSize: 12,
               }}
               formatter={(v: number) => [v, "Years with conflict"]}
+            />
+            <ReferenceLine
+              y={avgWar}
+              stroke="#c89c4a"
+              strokeDasharray="4 4"
+              label={{ value: `Avg ${avgWar.toFixed(1)}`, fontSize: 9, fill: "#a04525" }}
             />
             <Bar dataKey="yearsOfWar" name="Years of conflict">
               {regionalComparison.map((c, i) => (
