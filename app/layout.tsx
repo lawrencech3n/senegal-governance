@@ -2,10 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
 
+const siteUrl = "https://senegal-governance.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "The Quiet Republic — Governance in Senegal",
   description:
     "ECON 30 capstone: What explains Senegal's relative political stability compared to neighboring Francophone states since independence? Colonial rule, governance, and regional comparison.",
+  openGraph: {
+    title: "The Quiet Republic — Governance in Senegal",
+    url: siteUrl,
+    siteName: "Senegal Governance",
+    type: "website",
+  },
 };
 
 const navLinks = [
@@ -61,8 +70,14 @@ export default function RootLayout({
         </main>
         <footer className="border-t border-ink/15 mt-24 py-8 text-center text-xs text-ink/50">
           <div className="max-w-6xl mx-auto px-6">
-            ECON 30 Capstone · Progress &amp; Inequality · Spring 2026.
-            Sources: V-Dem, UCDP, CAM coups dataset.{" "}
+            ECON 30 Capstone · Progress &amp; Inequality · Spring 2026.{" "}
+            <a
+              href={siteUrl}
+              className="underline hover:text-rust transition-colors duration-75"
+            >
+              senegal-governance.vercel.app
+            </a>
+            . Sources: V-Dem, UCDP, CAM coups dataset.{" "}
             <Link
               href="/works-cited"
               className="underline hover:text-rust transition-colors duration-75"

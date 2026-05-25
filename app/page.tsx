@@ -150,9 +150,15 @@ export default function Home() {
       <section className="max-w-3xl space-y-2 text-sm text-ink/60">
         <h3 className="font-serif text-xl text-ink">About this project</h3>
         <p>
-          Built for ECON 30 at Stanford. One comparative question — not a
-          survey of all Senegalese history. Data: V-Dem, UCDP, CAM coups
-          dataset.
+          Built for ECON 30 at Stanford. Live site:{" "}
+          <a
+            href="https://senegal-governance.vercel.app"
+            className="text-rust underline hover:text-ink"
+          >
+            senegal-governance.vercel.app
+          </a>
+          . One comparative question — not a survey of all Senegalese history.
+          Data: V-Dem, UCDP, CAM coups dataset.
         </p>
         <Link
           href="/government"
