@@ -1,5 +1,5 @@
 export const researchQuestion =
-  "Why didn't Senegal experience as much political instability as neighboring countries?";
+  "What explains Senegal's relative political stability compared to neighboring Francophone states since independence?";
 
 export const mainArgument = {
   claim:

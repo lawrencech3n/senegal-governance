@@ -8,7 +8,7 @@ import {
   governanceHypotheses,
 } from "@/lib/data/government";
 import { colonialHistory, independenceTransition } from "@/lib/data/colonial";
-import { mainArgument, counterpoints } from "@/lib/data/narrative";
+import { mainArgument, counterpoints, researchQuestion } from "@/lib/data/narrative";
 
 export default function GovernmentPage() {
   const colonial = senegalRegimes.filter((r) => r.type === "colonial");
@@ -29,8 +29,7 @@ export default function GovernmentPage() {
           Research question
         </p>
         <p className="font-serif text-2xl text-ink leading-snug">
-          Why didn&apos;t Senegal experience as much political instability as
-          neighboring countries?
+          {researchQuestion}
         </p>
       </section>
 

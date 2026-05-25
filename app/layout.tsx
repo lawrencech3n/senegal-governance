@@ -5,7 +5,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "The Quiet Republic — Governance in Senegal",
   description:
-    "ECON 30 capstone: Why has Senegal experienced less political instability than its neighbors? Colonial rule, independence, and post-colonial governance compared.",
+    "ECON 30 capstone: What explains Senegal's relative political stability compared to neighboring Francophone states since independence? Colonial rule, governance, and regional comparison.",
 };
 
 const navLinks = [
