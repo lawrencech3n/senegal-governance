@@ -9,10 +9,10 @@ export default function TimelinePage() {
         </div>
         <h2 className="font-serif text-5xl text-ink mb-4">Timeline</h2>
         <p className="prose-serif text-ink/80">
-          Milestones in how Senegal was governed — from the first French posts
-          through federation, independence, and the tests of the 21st century.
-          Use the category filters to isolate colonial foundations, political
-          transitions, and episodes of violence.
+          Milestones in how Senegal was governed — from coastal trading posts
+          through federation, the negotiated path to independence, and the tests
+          of the 21st century. Use the category filters: Colonization for
+          imperial rule, Politics for the transition to self-government.
         </p>
       </header>
 

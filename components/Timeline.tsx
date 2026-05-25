@@ -6,7 +6,6 @@ import { timelineEvents, type TimelineEvent } from "@/lib/data/timeline";
 
 const categoryColor: Record<TimelineEvent["category"], string> = {
   colonization: "bg-oxblood",
-  extraction: "bg-ochre",
   politics: "bg-sage",
   war: "bg-rust",
   "post-colonial": "bg-ink",
@@ -14,7 +13,6 @@ const categoryColor: Record<TimelineEvent["category"], string> = {
 
 const categoryLabel: Record<TimelineEvent["category"], string> = {
   colonization: "Colonization",
-  extraction: "Extraction",
   politics: "Politics",
   war: "War",
   "post-colonial": "Post-colonial",

@@ -505,14 +505,14 @@ export const governanceHypotheses = [
   {
     title: "Colonial state-building",
     body: "Senegal had a longer, more centralized French administration than many neighbors — and Dakar was the capital of French West Africa. The bureaucracy, courts, and party system did not have to be invented at independence.",
-    evidence: "Colonial regime cards; V-Dem shows pre-built administrative capacity before 1960.",
+    evidence: "Colonial history and transition sections; V-Dem shows pre-built administrative capacity before 1960.",
     chartLink: "#colonial",
   },
   {
     title: "Elite continuity & managed pluralism",
     body: "Senghor and Diouf ruled through parties and elections rather than pure military dictatorship. Opposition was often co-opted or constrained, but violent regime change was rare — lowering coup incentives compared to Mali or Guinea.",
-    evidence: "Zero successful coups since 1960; peaceful alternations in 2000 and 2012 on the timeline.",
-    chartLink: "#democracy",
+    evidence: "Zero successful coups since 1960; transition section (1945–1963); alternations on timeline.",
+    chartLink: "#transition",
   },
   {
     title: "Sufi brotherhoods",
@@ -537,10 +537,31 @@ export const governanceHypotheses = [
 export const senegalRegimes: SenegalRegime[] = [
   {
     type: "colonial",
+    leader: "Coastal trading posts",
+    start: 1659,
+    end: 1887,
+    note: "Saint-Louis, Gorée, and limited French presence along the river. Trade and garrisons, not full territorial control of the interior.",
+  },
+  {
+    type: "colonial",
+    leader: "Four communes & indigénat",
+    start: 1848,
+    end: 1895,
+    note: "Assimilated citizens in Saint-Louis, Gorée, Dakar, and Rufisque vote in French elections; the interior is governed under indigénat from 1887.",
+  },
+  {
+    type: "colonial",
     leader: "French West Africa (AOF)",
     start: 1895,
     end: 1958,
     note: "Senegal as administrative center of the federation; indigénat, assimilationist law, and extractive political economy under Paris.",
+  },
+  {
+    type: "colonial",
+    leader: "Autonomy under French Community",
+    start: 1958,
+    end: 1959,
+    note: "After the 1958 referendum, Senegal gains a republican constitution within the French Community — executive power shifts to African ministers before full sovereignty.",
   },
   {
     type: "colonial",

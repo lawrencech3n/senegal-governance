@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { RegimeChart } from "@/components/charts/RegimeChart";
 import { RegionalCompareChart } from "@/components/charts/RegionalCompareChart";
 import { HypothesisExplorer } from "@/components/HypothesisExplorer";
@@ -6,6 +7,7 @@ import {
   conflicts,
   governanceHypotheses,
 } from "@/lib/data/government";
+import { colonialHistory, independenceTransition } from "@/lib/data/colonial";
 import { mainArgument, counterpoints } from "@/lib/data/narrative";
 
 export default function GovernmentPage() {
@@ -19,9 +21,7 @@ export default function GovernmentPage() {
           Section 1 · Evidence
         </p>
         <h2 className="font-serif text-5xl text-ink mb-4">Governance</h2>
-        <p className="prose-serif text-ink/80">
-          {mainArgument.claim}
-        </p>
+        <p className="prose-serif text-ink/80">{mainArgument.claim}</p>
       </header>
 
       <section className="border-l-4 border-rust pl-6 max-w-3xl">
@@ -41,13 +41,29 @@ export default function GovernmentPage() {
         <p className="prose-serif text-ink/80 max-w-3xl">
           Colonial governance was neither uniform nor purely extractive in the
           Senegalese case. Four communes in the Cape Verde peninsula had
-          assimilationist rights; the interior was governed through indigénat.
-          Dakar&apos;s prominence in the <em>fédération</em> meant a deeper
-          administrative footprint than in many neighboring territories — courts,
-          schools, parties, and a Francophone elite ready to inherit the
-          apparatus.
+          assimilationist rights from 1848; the interior was governed through
+          indigénat from 1887. Dakar&apos;s prominence in the{" "}
+          <em>fédération</em> meant a deeper administrative footprint than in
+          many neighboring territories — courts, schools, parties, and a
+          Francophone elite ready to inherit the apparatus when France withdrew.
         </p>
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="space-y-3 max-w-3xl">
+          {colonialHistory.map((m) => (
+            <article
+              key={m.year + m.title}
+              className="grid sm:grid-cols-[5rem_1fr] gap-3 border-b border-ink/10 pb-3"
+            >
+              <span className="font-serif text-2xl text-rust">{m.year}</span>
+              <div>
+                <h4 className="font-medium text-ink">{m.title}</h4>
+                <p className="text-sm text-ink/75 leading-relaxed mt-1">
+                  {m.body}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="grid md:grid-cols-2 gap-4 pt-4">
           {colonial.map((r) => (
             <div key={r.leader} className="border border-ink/15 bg-parchment/50 p-5">
               <div className="text-xs uppercase tracking-[0.2em] text-rust mb-1">
@@ -61,9 +77,47 @@ export default function GovernmentPage() {
         </div>
       </section>
 
+      <section className="space-y-4" id="transition">
+        <h3 className="font-serif text-3xl text-ink">
+          2. From colony to republic (1945–1963)
+        </h3>
+        <p className="prose-serif text-ink/80 max-w-3xl">
+          Senegal did not jump from empire to independence overnight. Between
+          1946 and 1960, France expanded citizenship, granted territorial
+          autonomy, and offered association in the French Community. Senegalese
+          politicians — above all Senghor and Lamine Guèye — fought to control
+          the inherited state rather than destroy it. That gradual, negotiated
+          transfer helps explain why the army never seized power at independence,
+          unlike in Mali or Congo.
+        </p>
+        <div className="space-y-3 max-w-3xl">
+          {independenceTransition.map((m) => (
+            <article
+              key={m.year + m.title}
+              className="grid sm:grid-cols-[5rem_1fr] gap-3 border-b border-ink/10 pb-3"
+            >
+              <span className="font-serif text-2xl text-rust">{m.year}</span>
+              <div>
+                <h4 className="font-medium text-ink">{m.title}</h4>
+                <p className="text-sm text-ink/75 leading-relaxed mt-1">
+                  {m.body}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <p className="text-sm text-ink/60 max-w-3xl">
+          See also the{" "}
+          <Link href="/timeline" className="text-rust underline hover:text-ink">
+            interactive timeline
+          </Link>{" "}
+          — filter by &ldquo;Politics&rdquo; for the independence sequence.
+        </p>
+      </section>
+
       <section className="space-y-4" id="democracy">
         <h3 className="font-serif text-3xl text-ink">
-          2. Democratic deepening (and its limits)
+          3. Democratic deepening (and its limits)
         </h3>
         <p className="prose-serif text-ink/80 max-w-3xl">
           The chart below tracks liberal democracy (0 = none, 1 = full) from
@@ -81,7 +135,7 @@ export default function GovernmentPage() {
       </section>
 
       <section className="space-y-4">
-        <h3 className="font-serif text-3xl text-ink">3. After independence</h3>
+        <h3 className="font-serif text-3xl text-ink">4. After independence</h3>
         <div className="grid md:grid-cols-2 gap-4">
           {postcolonial.map((r) => (
             <div key={r.leader} className="border border-ink/15 bg-parchment/50 p-5">
@@ -100,7 +154,7 @@ export default function GovernmentPage() {
 
       <section className="space-y-4" id="violence">
         <h3 className="font-serif text-3xl text-ink">
-          4. Violence — present, but contained
+          5. Violence — present, but contained
         </h3>
         <p className="prose-serif text-ink/80 max-w-3xl">
           Senegal is not conflict-free. The comparison is relative: neighbors
@@ -139,20 +193,20 @@ export default function GovernmentPage() {
 
       <section className="space-y-4" id="compare">
         <h3 className="font-serif text-3xl text-ink">
-          5. Compared to neighbors
+          6. Compared to neighbors
         </h3>
         <p className="prose-serif text-ink/80 max-w-3xl">
           This is the core interactive comparison. Senegal (dark red) against
-          peer states on successful coups since 1960 and years with UCDP-classified
-          organized violence (1989–2024). The gap is the empirical anchor for the
-          research question.
+          peer states on successful coups since 1960 and years with
+          UCDP-classified organized violence (1989–2024). The gap is the
+          empirical anchor for the research question.
         </p>
         <RegionalCompareChart />
       </section>
 
       <section className="space-y-4">
         <h3 className="font-serif text-3xl text-ink">
-          6. Competing explanations
+          7. Competing explanations
         </h3>
         <p className="prose-serif text-ink/80 max-w-3xl mb-2">
           Use the explorer below to connect each hypothesis to evidence on this
