@@ -158,11 +158,8 @@ export default function GovernmentPage() {
             6. Competing explanations
           </h3>
           <p className="prose-serif text-ink/80 max-w-3xl mb-2">
-            Select a hypothesis below, then{" "}
-            <Link href="/#weighting" className="text-rust underline hover:text-ink">
-              weight the evidence
-            </Link>{" "}
-            on the overview to see how your read compares to the author&apos;s.
+            Select a hypothesis to see what evidence this project brings to bear.
+            No single factor wins in the literature.
           </p>
           <HypothesisExplorer />
         </section>

@@ -5,7 +5,6 @@ import { MethodologyNote } from "@/components/MethodologyNote";
 import { ExecutiveSummary } from "@/components/ExecutiveSummary";
 import { ContributionBox } from "@/components/ContributionBox";
 import { ContinuityIndex } from "@/components/ContinuityIndex";
-import { EvidenceWeighting } from "@/components/EvidenceWeighting";
 import {
   researchQuestion,
   stakes,
@@ -49,8 +48,6 @@ export default function Home() {
       </section>
 
       <ContinuityIndex />
-
-      <EvidenceWeighting />
 
       <section className="max-w-3xl border border-ink/15 bg-parchment/50 p-6 md:p-8 space-y-3">
         <div className="text-xs uppercase tracking-[0.2em] text-rust">
