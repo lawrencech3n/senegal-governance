@@ -88,9 +88,9 @@ export default function GovernmentPage() {
             <Link href="/culture#fork" className="text-rust underline hover:text-ink">
               1958 fork
             </Link>
-            ; see the author-coded{" "}
-            <Link href="/#continuity" className="text-rust underline hover:text-ink">
-              continuity index
+            ; locate peers on the{" "}
+            <Link href="/#map" className="text-rust underline hover:text-ink">
+              regional map
             </Link>
             .
           </p>

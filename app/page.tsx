@@ -4,7 +4,6 @@ import { ProgressFrame } from "@/components/ProgressFrame";
 import { MethodologyNote } from "@/components/MethodologyNote";
 import { ContributionBox } from "@/components/ContributionBox";
 import { WestAfricaMap } from "@/components/WestAfricaMap";
-import { ContinuityIndex } from "@/components/ContinuityIndex";
 import {
   researchQuestion,
   stakes,
@@ -47,8 +46,6 @@ export default function Home() {
         <StabilityOutlierChart />
         <MethodologyNote />
       </section>
-
-      <ContinuityIndex />
 
       <section className="max-w-3xl border border-ink/15 bg-parchment/50 p-6 md:p-8 space-y-3">
         <div className="text-xs uppercase tracking-[0.2em] text-rust">

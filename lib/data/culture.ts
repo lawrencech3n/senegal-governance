@@ -156,8 +156,8 @@ export const independenceFork = {
         },
         {
           year: "After 1960",
-          label: "Coups despite continuity",
-          detail: "High continuity score but six successful coups — ethnic and Sahel stress matter too.",
+          label: "Coups despite AOF inheritance",
+          detail: "Shared French institutional legacy with Senegal — but ethnic fracture and Sahel stress produced six successful coups.",
         },
       ],
     },

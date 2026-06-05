@@ -9,7 +9,7 @@ export const originalInsight = {
   body: "Most accounts treat Senegal as culturally exceptional or French-favored. This site tests a narrower, comparative claim: the same colonial power built different state capacity in Dakar than in Bamako or Conakry — and Senegalese elites negotiated continuity rather than rupture at independence. The gap in coups and conflict years (below) is the empirical hook; the colonial-to-republic sequence is the mechanism story.",
   bullets: [
     "A comparative hook — not a Senegal survey — against six Francophone peers since 1960.",
-    "An author-coded institutional continuity index at independence (Senegal vs. Guinea vs. Mali).",
+    "A 1958 fork diagram comparing exit paths for all seven peer states at independence.",
     "Hypothesis explorer weighing colonial state-building, elite bargains, Sufi mediation, ethnicity, and Françafrique.",
     "A progress-studies lens: stability as necessary but insufficient for shared prosperity.",
   ],
