@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { StabilityOutlierChart } from "@/components/charts/StabilityOutlierChart";
 import { ProgressFrame } from "@/components/ProgressFrame";
+import { MethodologyNote } from "@/components/MethodologyNote";
 import {
   researchQuestion,
   stakes,
@@ -61,6 +62,7 @@ export default function Home() {
       <section className="space-y-4" id="outlier">
         <p className="act-label">Act II · The evidence</p>
         <StabilityOutlierChart />
+        <MethodologyNote />
       </section>
 
       {/* Argument + original contribution — rubric 1 & 7 */}

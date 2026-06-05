@@ -514,7 +514,8 @@ export const governanceHypotheses = [
     strength: "strong" as const,
     body: "Senghor and Diouf ruled through parties and elections rather than pure military dictatorship. Opposition was often co-opted or constrained, but violent regime change was rare — lowering coup incentives compared to Mali or Guinea.",
     evidence: "Zero successful coups since 1960; transition section (1945–1963); alternations on timeline.",
-    chartLink: "#transition",
+    chartLink: "/culture#fork",
+    chartLinkLabel: "View 1958 fork diagram",
   },
   {
     title: "Sufi brotherhoods",
@@ -522,6 +523,7 @@ export const governanceHypotheses = [
     body: "The Mourides, Tijaniyya, and other orders mediate between state and society. Scholars argue they channel dissent and discourage radical alternatives — a social structure less present in more fractured polities.",
     evidence: "Qualitative literature (Diouf); harder to test quantitatively — noted as a limit.",
     chartLink: "/culture",
+    chartLinkLabel: "Read institutional legacies",
   },
   {
     title: "Relative ethnic cohesion",
@@ -535,7 +537,8 @@ export const governanceHypotheses = [
     strength: "moderate" as const,
     body: "Continued French military presence, aid, and informal influence may have discouraged putsches and rewarded cooperative leaders. The same ties are criticized as limiting true sovereignty.",
     evidence: "Legacies section; comparison chart shows neighbors with weaker French ties had more coups.",
-    chartLink: "/culture",
+    chartLink: "/culture#fork",
+    chartLinkLabel: "View 1958 fork diagram",
   },
 ];
 

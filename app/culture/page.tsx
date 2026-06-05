@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
 import { cultureThemes } from "@/lib/data/culture";
 import { PageSynthesis } from "@/components/PageSynthesis";
+import { IndependenceForkDiagram } from "@/components/IndependenceForkDiagram";
 import { progressLens } from "@/lib/data/narrative";
+
+export const metadata: Metadata = {
+  title: "Institutional Legacies",
+  description:
+    "Colonial and post-colonial institutions — indigénat, the CFA franc, and Françafrique — that shaped Senegal after independence.",
+};
 
 export default function CulturePage() {
   return (
@@ -20,6 +28,8 @@ export default function CulturePage() {
           as in Mali or Guinea.
         </p>
       </header>
+
+      <IndependenceForkDiagram />
 
       <section className="grid sm:grid-cols-2 gap-4 max-w-4xl">
         <article className="border border-ink/15 bg-parchment/40 p-5">

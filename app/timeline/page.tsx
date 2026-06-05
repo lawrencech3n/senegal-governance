@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { Timeline } from "@/components/Timeline";
 import { PageSynthesis } from "@/components/PageSynthesis";
+
+export const metadata: Metadata = {
+  title: "Timeline",
+  description:
+    "Interactive political history of Senegal from Saint-Louis through independence, alternations, and 21st-century stress tests.",
+};
 
 export default function TimelinePage() {
   return (

@@ -13,6 +13,7 @@ import {
   ReferenceLine,
 } from "recharts";
 import { regionalComparison } from "@/lib/data/government";
+import { useTabListKeyboard } from "@/lib/useTabListKeyboard";
 
 type Metric = "coups" | "yearsOfWar";
 
@@ -46,6 +47,10 @@ const metricConfig: Record<
 export function StabilityOutlierChart() {
   const [metric, setMetric] = useState<Metric>("coups");
   const cfg = metricConfig[metric];
+  const metrics = Object.keys(metricConfig) as Metric[];
+  const metricIndex = metrics.indexOf(metric);
+  const setMetricByIndex = (index: number) => setMetric(metrics[index]!);
+  const onTabKeyDown = useTabListKeyboard(metrics.length, metricIndex, setMetricByIndex);
 
   const { avg, gap, senegalVal, sorted } = useMemo(() => {
     const peers = regionalComparison.filter((c) => c.country !== "Senegal");
@@ -72,12 +77,19 @@ export function StabilityOutlierChart() {
         </p>
       </header>
 
-      <div className="flex flex-wrap gap-2 px-5 pt-4" role="tablist" aria-label="Comparison metric">
-        {(Object.keys(metricConfig) as Metric[]).map((m) => (
+      <div
+        className="flex flex-wrap gap-2 px-5 pt-4"
+        role="tablist"
+        aria-label="Comparison metric"
+        onKeyDown={onTabKeyDown}
+      >
+        {metrics.map((m) => (
           <button
             key={m}
+            type="button"
             role="tab"
             aria-selected={metric === m}
+            tabIndex={metric === m ? 0 : -1}
             onClick={() => setMetric(m)}
             className={`text-xs px-3 py-2 border transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust ${
               metric === m

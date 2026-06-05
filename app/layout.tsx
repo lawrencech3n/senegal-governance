@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SiteNav } from "@/components/SiteNav";
+import { serif, sans } from "@/lib/fonts";
 import "./globals.css";
 
 const siteUrl = "https://senegal-governance.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "The Quiet Republic — Governance in Senegal",
+  title: {
+    default: "The Quiet Republic — Governance in Senegal",
+    template: "%s · The Quiet Republic",
+  },
   description:
     "ECON 30 capstone: What explains Senegal's relative political stability compared to neighboring Francophone states since independence? Colonial rule, governance, and regional comparison.",
   openGraph: {
@@ -17,22 +22,14 @@ export const metadata: Metadata = {
   },
 };
 
-const navLinks = [
-  { href: "/", label: "Overview" },
-  { href: "/government", label: "Governance" },
-  { href: "/timeline", label: "Timeline" },
-  { href: "/culture", label: "Legacies" },
-  { href: "/works-cited", label: "Works Cited" },
-];
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="grain min-h-screen">
+    <html lang="en" className={`${serif.variable} ${sans.variable}`}>
+      <body className="grain min-h-screen font-sans">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-ink focus:text-parchment focus:px-4 focus:py-2 focus:text-sm"
@@ -45,24 +42,11 @@ export default function RootLayout({
               <p className="text-xs uppercase tracking-[0.3em] text-ink/60">
                 ECON 30 · The Quiet Republic
               </p>
-              <h1 className="font-serif text-2xl md:text-3xl text-ink leading-none mt-1">
+              <p className="font-serif text-2xl md:text-3xl text-ink leading-none mt-1">
                 Senegal &amp; Political Stability
-              </h1>
+              </p>
             </Link>
-            <nav
-              className="flex flex-wrap gap-x-5 gap-y-1 text-sm"
-              aria-label="Main navigation"
-            >
-              {navLinks.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className="text-ink/70 hover:text-rust transition-colors duration-75"
-                >
-                  {l.label}
-                </Link>
-              ))}
-            </nav>
+            <SiteNav />
           </div>
         </header>
         <main id="main-content" className="max-w-6xl mx-auto px-6 py-12">

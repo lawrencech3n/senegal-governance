@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Works Cited",
+  description:
+    "Datasets and scholarship behind the Senegal governance comparison: V-Dem, UCDP, CAM coups dataset, and key books.",
+};
+
 type Citation = {
   title: string;
   author?: string;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { timelineEvents, type TimelineEvent } from "@/lib/data/timeline";
 
 const categoryColor: Record<TimelineEvent["category"], string> = {
@@ -58,18 +58,41 @@ const phasePresets: PhasePreset[] = [
   },
 ];
 
+const independencePreset = phasePresets.find((p) => p.id === "independence")!;
+
+function EventDetail({ event }: { event: TimelineEvent }) {
+  return (
+    <>
+      <div className="flex items-baseline gap-4 mb-2">
+        <span className="font-serif text-4xl text-ink">{event.year}</span>
+        <span
+          className={`text-xs uppercase tracking-[0.2em] px-2 py-1 text-parchment ${categoryColor[event.category]}`}
+        >
+          {categoryLabel[event.category]}
+        </span>
+      </div>
+      <h3 className="font-serif text-2xl text-ink mb-3">{event.title}</h3>
+      <p className="prose-serif text-ink/80 max-w-2xl">{event.body}</p>
+    </>
+  );
+}
+
 export function Timeline() {
+  const reduceMotion = useReducedMotion();
+
   const sortedAll = useMemo(
     () => [...timelineEvents].sort((a, b) => a.year - b.year),
     [],
   );
 
   const [filter, setFilter] = useState<TimelineEvent["category"] | "all">(
-    "all",
+    independencePreset.filter,
   );
-  const [yearRange, setYearRange] = useState<{ min?: number; max?: number }>(
-    {},
-  );
+  const [yearRange, setYearRange] = useState<{ min?: number; max?: number }>({
+    min: independencePreset.yearMin,
+    max: independencePreset.yearMax,
+  });
+
   const sorted = useMemo(
     () =>
       sortedAll.filter((e) => {
@@ -84,8 +107,12 @@ export function Timeline() {
   const [activeIdx, setActiveIdx] = useState(0);
 
   const safeIdx = Math.min(activeIdx, Math.max(0, sorted.length - 1));
-  const minYear = sortedAll[0]?.year ?? 1659;
-  const maxYear = sortedAll[sortedAll.length - 1]?.year ?? 2024;
+  const rangeMin = sorted[0]?.year ?? sortedAll[0]?.year ?? 1659;
+  const rangeMax =
+    sorted[sorted.length - 1]?.year ??
+    sortedAll[sortedAll.length - 1]?.year ??
+    2024;
+  const yearSpan = Math.max(rangeMax - rangeMin, 1);
   const active = sorted[safeIdx] ?? sortedAll[0];
 
   const toggleFilter = (cat: TimelineEvent["category"] | "all") => {
@@ -115,14 +142,16 @@ export function Timeline() {
   return (
     <div className="space-y-8">
       <p className="text-sm text-ink/70 max-w-2xl">
-        Start with a phase preset to follow the argument — colonial foundations,
-        the independence arc, or post-1960 tests — then click any dot for detail.
+        The timeline opens on the independence arc — the 1944–1963 sequence that
+        distinguishes Senegal from Guinea&apos;s immediate rupture. Click any
+        event for detail, or switch presets below.
       </p>
 
       <div className="flex flex-wrap gap-2" role="group" aria-label="Timeline phase presets">
         {phasePresets.map((preset) => (
           <button
             key={preset.id}
+            type="button"
             onClick={() => applyPreset(preset)}
             className={`text-xs px-3 py-2 border transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust ${
               activePreset === preset.id
@@ -138,8 +167,9 @@ export function Timeline() {
 
       <div className="flex flex-wrap gap-2" role="group" aria-label="Filter timeline by category">
         <button
+          type="button"
           onClick={() => toggleFilter("all")}
-            className={`text-xs px-3 py-1.5 border transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust ${
+          className={`text-xs px-3 py-1.5 border transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust ${
             filter === "all"
               ? "bg-ink text-parchment border-ink"
               : "border-ink/30 text-ink/70 hover:border-ink"
@@ -150,8 +180,9 @@ export function Timeline() {
         {allCategories.map((cat) => (
           <button
             key={cat}
+            type="button"
             onClick={() => toggleFilter(cat)}
-            className={`text-xs px-3 py-1.5 border transition flex items-center gap-1.5 ${
+            className={`text-xs px-3 py-1.5 border transition flex items-center gap-1.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust ${
               filter === cat
                 ? "bg-ink text-parchment border-ink"
                 : "border-ink/30 text-ink/70 hover:border-ink"
@@ -165,23 +196,51 @@ export function Timeline() {
         ))}
       </div>
 
-      <div className="relative pt-10 pb-16">
+      {/* Mobile: vertical event list */}
+      <ol className="md:hidden space-y-2 border border-ink/15 bg-parchment/40 p-4">
+        {sorted.map((event, idx) => {
+          const isActive = idx === safeIdx;
+          return (
+            <li key={event.year + event.title}>
+              <button
+                type="button"
+                onClick={() => setActiveIdx(idx)}
+                aria-pressed={isActive}
+                className={`w-full text-left px-3 py-2 border transition ${
+                  isActive
+                    ? "border-rust bg-parchment/80"
+                    : "border-ink/10 hover:border-ink/30"
+                }`}
+              >
+                <span className="font-serif text-lg text-rust mr-2">
+                  {event.year}
+                </span>
+                <span className="text-sm text-ink">{event.title}</span>
+              </button>
+            </li>
+          );
+        })}
+      </ol>
+
+      {/* Desktop: horizontal scrubber */}
+      <div className="relative pt-10 pb-16 hidden md:block">
         <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px bg-ink/20" />
         <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex justify-between text-xs text-ink/50">
-          <span>{minYear}</span>
-          <span>{maxYear}</span>
+          <span>{rangeMin}</span>
+          <span>{rangeMax}</span>
         </div>
 
         <div className="relative h-16">
           {sorted.map((event, idx) => {
-            const pct = ((event.year - minYear) / (maxYear - minYear)) * 100;
+            const pct = ((event.year - rangeMin) / yearSpan) * 100;
             const isActive = idx === safeIdx;
             return (
               <button
                 key={event.year + event.title}
+                type="button"
                 onClick={() => setActiveIdx(idx)}
                 style={{ left: `${pct}%` }}
-                className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 group"
+                className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rust"
                 aria-label={`${event.year} — ${event.title}`}
                 aria-pressed={isActive}
               >
@@ -208,39 +267,32 @@ export function Timeline() {
       <AnimatePresence mode="wait">
         <motion.div
           key={active.year + active.title}
-          initial={{ opacity: 0, y: 8 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.25 }}
+          exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}
+          transition={{ duration: reduceMotion ? 0 : 0.25 }}
           className="border border-ink/15 bg-parchment/60 p-8"
         >
-          <div className="flex items-baseline gap-4 mb-2">
-            <span className="font-serif text-4xl text-ink">{active.year}</span>
-            <span
-              className={`text-xs uppercase tracking-[0.2em] px-2 py-1 text-parchment ${categoryColor[active.category]}`}
-            >
-              {categoryLabel[active.category]}
-            </span>
-          </div>
-          <h3 className="font-serif text-2xl text-ink mb-3">{active.title}</h3>
-          <p className="prose-serif text-ink/80 max-w-2xl">{active.body}</p>
+          <EventDetail event={active} />
         </motion.div>
       </AnimatePresence>
 
       <div className="flex flex-wrap gap-2">
         <button
+          type="button"
           onClick={() => setActiveIdx(Math.max(0, safeIdx - 1))}
           disabled={safeIdx === 0}
-          className="text-xs uppercase tracking-[0.2em] px-3 py-2 border border-ink/30 hover:bg-ink hover:text-parchment transition disabled:opacity-30"
+          className="text-xs uppercase tracking-[0.2em] px-3 py-2 border border-ink/30 hover:bg-ink hover:text-parchment transition disabled:opacity-30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust"
         >
           ← Prev
         </button>
         <button
+          type="button"
           onClick={() =>
             setActiveIdx(Math.min(sorted.length - 1, safeIdx + 1))
           }
           disabled={safeIdx >= sorted.length - 1}
-          className="text-xs uppercase tracking-[0.2em] px-3 py-2 border border-ink/30 hover:bg-ink hover:text-parchment transition disabled:opacity-30"
+          className="text-xs uppercase tracking-[0.2em] px-3 py-2 border border-ink/30 hover:bg-ink hover:text-parchment transition disabled:opacity-30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust"
         >
           Next →
         </button>

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function ColonialTransitionDiagram() {
   const phases = [
     { label: "Trading posts", years: "1659–1887", tone: "colonial" },
@@ -75,7 +77,10 @@ export function ColonialTransitionDiagram() {
       <p className="text-xs text-ink/55 mt-3 max-w-2xl">
         The argument: Senegal inherited a functioning center (Dakar) and exited
         through negotiation — not rupture like Guinea (1958) or military
-        takeover like Mali (1968).
+        takeover like Mali (1968).{" "}
+        <Link href="/culture#fork" className="text-rust underline hover:text-ink">
+          Compare the 1958 paths →
+        </Link>
       </p>
     </figure>
   );

@@ -30,8 +30,8 @@ export const progressLens = {
   futureLearning:
     "For progress studies: stability is a necessary but insufficient condition. The 2021–2024 stress tests ask whether Senegal can renew its settlement without repeating neighbors' ruptures — or whether managed politics will finally exhaust reform capacity.",
   paragraphs: [
-    "Political instability is one of the clearest brakes on long-run development. Coups and civil wars destroy capital, interrupt schooling, and push talent abroad. Senegal kept the institutional floor intact long enough for partial gains in health, education, and urbanization — even when growth disappointed.",
-    "The comparison is not a victory lap. Senegal remains a lower-middle-income country with high youth unemployment and deep regional inequality. The question is whether the same mechanisms that prevented coups also slowed structural reform.",
+    "Institutional breakdown is a development tax: when governments fall to force, schooling stops, investment flees, and reform halts. Senegal paid a different price — it kept the institutional floor intact long enough for partial gains in health, education, and urbanization, even as GDP growth underperformed peers with more volatile politics.",
+    "That is not a success story on its own. Senegal remains lower-middle-income, with youth unemployment above 20% and gains concentrated in Dakar while Casamance lags. The open question for progress studies: did the same elite bargains that prevented coups also slow the structural reforms those gains require?",
   ],
 };
 
