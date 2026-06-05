@@ -15,27 +15,6 @@ export const originalInsight = {
   ],
 };
 
-export const executiveSummary = [
-  {
-    step: 1,
-    label: "The gap",
-    href: "#outlier",
-    text: "Senegal has zero successful coups since 1960; Francophone peers average far higher on coups and conflict years.",
-  },
-  {
-    step: 2,
-    label: "The mechanism",
-    href: "#continuity",
-    text: "Senegal negotiated exit in 1958 and inherited Dakar’s state apparatus; Guinea chose rupture.",
-  },
-  {
-    step: 3,
-    label: "The limit",
-    href: "#takeaway",
-    text: "Institutional calm bought partial progress — not East Asian growth or regional equality.",
-  },
-];
-
 export const mainArgument = {
   claim:
     "Senegal's relative calm is not an accident of culture alone — it reflects a distinctive colonial inheritance (a strong Dakar-centered state), elite-managed politics after 1960, and social institutions that channel conflict — but that stability has limits and has not guaranteed broad economic progress.",

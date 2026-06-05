@@ -2,7 +2,6 @@ import Link from "next/link";
 import { StabilityOutlierChart } from "@/components/charts/StabilityOutlierChart";
 import { ProgressFrame } from "@/components/ProgressFrame";
 import { MethodologyNote } from "@/components/MethodologyNote";
-import { ExecutiveSummary } from "@/components/ExecutiveSummary";
 import { ContributionBox } from "@/components/ContributionBox";
 import { ContinuityIndex } from "@/components/ContinuityIndex";
 import {
@@ -23,7 +22,6 @@ export default function Home() {
         <p className="text-xs uppercase tracking-[0.3em] text-rust mb-3">
           ECON 30 Capstone · Progress &amp; Inequality · Spring 2026
         </p>
-        <ExecutiveSummary />
         <div>
           <p className="act-label mb-4">Act I · The divergence</p>
           <p className="prose-serif text-xl text-ink/90 mb-6 leading-relaxed max-w-3xl">
