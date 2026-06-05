@@ -42,6 +42,9 @@ export default function RootLayout({
               <p className="text-xs uppercase tracking-[0.3em] text-ink/60">
                 ECON 30 · The Quiet Republic
               </p>
+              <p className="text-xs text-ink/55 mt-0.5 tracking-wide">
+                Lawrence Chen · Spring 2026
+              </p>
               <p className="font-serif text-2xl md:text-3xl text-ink leading-none mt-1">
                 Senegal &amp; Political Stability
               </p>
