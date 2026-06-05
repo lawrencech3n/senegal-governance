@@ -3,6 +3,7 @@ import { StabilityOutlierChart } from "@/components/charts/StabilityOutlierChart
 import { ProgressFrame } from "@/components/ProgressFrame";
 import { MethodologyNote } from "@/components/MethodologyNote";
 import { ContributionBox } from "@/components/ContributionBox";
+import { WestAfricaMap } from "@/components/WestAfricaMap";
 import { ContinuityIndex } from "@/components/ContinuityIndex";
 import {
   researchQuestion,
@@ -31,11 +32,13 @@ export default function Home() {
             {researchQuestion}
           </h2>
           <p className="prose-serif text-ink/80 max-w-3xl">
-            Same empire, same decade — different outcomes. The chart and continuity
-            index below quantify and code that gap; the rest of the site asks why.
+            Same empire, same decade — different outcomes. The map and charts
+            below locate and quantify the gap; the rest of the site asks why.
           </p>
         </div>
       </section>
+
+      <WestAfricaMap />
 
       <ContributionBox />
 

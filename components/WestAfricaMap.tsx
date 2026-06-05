@@ -1,56 +1,70 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { geoGraticule, geoMercator, geoPath } from "d3-geo";
+import peerFeatures from "@/lib/data/westAfricaPeers.json";
 import {
   mapEras,
   mapFootnote,
+  numericToPeer,
   peerCountryColors,
   peerCountryLabels,
   peerCountryOrder,
-  type MapRegion,
+  styleForRegion,
+  type PeerFeatureCollection,
 } from "@/lib/data/westAfricaMap";
 import { useTabListKeyboard } from "@/lib/useTabListKeyboard";
 
-function RegionShape({
-  region,
-  highlighted,
-  onHover,
-}: {
-  region: MapRegion;
-  highlighted: boolean;
-  onHover: (id: string | null) => void;
-}) {
-  return (
-    <path
-      d={region.path}
-      fill={region.fill}
-      fillOpacity={
-        region.fillOpacity ?? (region.fill === "transparent" ? 0 : 0.9)
-      }
-      stroke={region.stroke ?? (highlighted ? "#1a1814" : "#1a181440")}
-      strokeWidth={region.strokeWidth ?? (highlighted ? 2.5 : 1)}
-      strokeDasharray={region.strokeDasharray}
-      className="transition-[stroke-width] duration-100 cursor-default"
-      onMouseEnter={() => onHover(region.id)}
-      onMouseLeave={() => onHover(null)}
-      aria-label={region.label}
-    >
-      <title>{region.label}</title>
-    </path>
-  );
-}
+const collection = peerFeatures as PeerFeatureCollection;
+
+const SVG_WIDTH = 640;
+const SVG_HEIGHT = 520;
+const PAD: [[number, number], [number, number]] = [
+  [20, 16],
+  [620, 500],
+];
 
 export function WestAfricaMap() {
   const [eraId, setEraId] = useState("today");
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  const eraIndex = mapEras.findIndex((e) => e.id === eraId);
-  const era = mapEras[eraIndex] ?? mapEras[mapEras.length - 1]!;
-  const onTabKeyDown = useTabListKeyboard(mapEras.length, eraIndex, (i) =>
-    setEraId(mapEras[i]!.id),
+  const { peerFeatures, contextFeatures } = useMemo(() => {
+    const peers = collection.features.filter((f) => f.properties.layer === "peer");
+    const context = collection.features.filter(
+      (f) => f.properties.layer === "context",
+    );
+    return { peerFeatures: peers, contextFeatures: context };
+  }, []);
+
+  const fitCollection = useMemo(
+    () => ({
+      type: "FeatureCollection" as const,
+      features: peerFeatures,
+    }),
+    [peerFeatures],
   );
 
-  const hoveredRegion = era.regions.find((r) => r.id === hoveredId);
+  const pathGenerator = useMemo(() => {
+    const projection = geoMercator().fitExtent(PAD, fitCollection);
+    return geoPath(projection);
+  }, [fitCollection]);
+
+  const graticulePath = useMemo(
+    () => pathGenerator(geoGraticule().step([4, 4])()) ?? "",
+    [pathGenerator],
+  );
+
+  const eraIndex = mapEras.findIndex((e) => e.id === eraId);
+  const era = mapEras[eraIndex] ?? mapEras[mapEras.length - 1]!;
+  const onTabKeyDown = useTabListKeyboard(mapEras.length, eraIndex, (i) => {
+    setEraId(mapEras[i]!.id);
+    setHoveredId(null);
+  });
+
+  const hoveredFeature = peerFeatures.find((f) => String(f.id) === hoveredId);
+  const hoveredLabel = hoveredFeature
+    ? styleForRegion(eraId, String(hoveredFeature.id)).label
+    : null;
 
   return (
     <figure
@@ -59,12 +73,12 @@ export function WestAfricaMap() {
     >
       <figcaption className="space-y-2 max-w-3xl">
         <h3 className="font-serif text-2xl md:text-3xl text-ink">
-          West Africa — borders over time
+          West Africa — where the comparison lives
         </h3>
         <p className="text-sm text-ink/70 leading-relaxed">
-          The seven peer states in this project, shown across four eras. Toggle
-          the year to see pre-colonial polities, colonial partition,
-          independence, and today&apos;s borders. Hover a region for its label.
+          The seven peer states on real coastlines and borders (Natural Earth).
+          Toggle the era to see colonial partition, then compare to the charts
+          below. Neighboring countries are shown in outline for context only.
         </p>
       </figcaption>
 
@@ -97,30 +111,73 @@ export function WestAfricaMap() {
       </div>
 
       <div className="grid lg:grid-cols-[1fr_200px] gap-4 items-start">
-        <div className="border border-ink/10 bg-[#ede5d3] p-2 md:p-4">
+        <div className="border border-ink/10 bg-[#b8c9d9] p-1 md:p-2 rounded-sm overflow-hidden">
           <svg
-            viewBox="0 0 480 520"
-            className="w-full h-auto max-h-[420px]"
+            viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
+            className="w-full h-auto"
             role="img"
-            aria-label={`Schematic map of West Africa peer countries, ${era.title}`}
+            aria-label={`Map of West Africa peer countries, ${era.title}`}
           >
-            <rect width="480" height="520" fill="#ede5d3" />
+            <rect width={SVG_WIDTH} height={SVG_HEIGHT} fill="#b8c9d9" />
+            {graticulePath && (
+              <path
+                d={graticulePath}
+                fill="none"
+                stroke="#1a181412"
+                strokeWidth={0.5}
+                pointerEvents="none"
+              />
+            )}
+            {contextFeatures.map((feature) => {
+              const d = pathGenerator(feature);
+              if (!d) return null;
+              return (
+                <path
+                  key={`ctx-${feature.id}`}
+                  d={d}
+                  fill="#e8e0d4"
+                  fillOpacity={0.85}
+                  stroke="#1a181418"
+                  strokeWidth={0.5}
+                  pointerEvents="none"
+                />
+              );
+            })}
+            {peerFeatures.map((feature) => {
+              const numericId = String(feature.id);
+              const d = pathGenerator(feature);
+              if (!d) return null;
+              const style = styleForRegion(eraId, numericId);
+              const highlighted = hoveredId === numericId;
+              const isSenegal = numericToPeer[numericId] === "senegal";
+              return (
+                <path
+                  key={numericId}
+                  d={d}
+                  fill={style.fill}
+                  fillOpacity={style.fillOpacity}
+                  stroke={highlighted ? "#1a1814" : style.stroke}
+                  strokeWidth={
+                    highlighted ? 2.5 : isSenegal ? 1.75 : style.strokeWidth
+                  }
+                  strokeDasharray={style.strokeDasharray}
+                  className="transition-[stroke-width,fill-opacity] duration-75 cursor-default"
+                  onMouseEnter={() => setHoveredId(numericId)}
+                  onMouseLeave={() => setHoveredId(null)}
+                  aria-label={style.label}
+                >
+                  <title>{style.label}</title>
+                </path>
+              );
+            })}
             <text
-              x="18"
-              y="508"
-              fill="#1a181480"
+              x={16}
+              y={SVG_HEIGHT - 12}
+              fill="#1a181460"
               style={{ fontSize: 9, fontFamily: "var(--font-sans), sans-serif" }}
             >
-              Atlantic ←
+              Atlantic ← · Natural Earth 110m
             </text>
-            {era.regions.map((region) => (
-              <RegionShape
-                key={region.id}
-                region={region}
-                highlighted={hoveredId === region.id}
-                onHover={setHoveredId}
-              />
-            ))}
           </svg>
         </div>
 
@@ -133,16 +190,16 @@ export function WestAfricaMap() {
             <p className="text-ink/70 text-xs leading-relaxed">
               {era.description}
             </p>
-            {hoveredRegion ? (
+            {hoveredLabel ? (
               <p className="text-ink text-xs border-t border-ink/10 pt-2">
                 <span className="uppercase tracking-[0.12em] text-rust text-[0.65rem] block mb-0.5">
-                  Region
+                  Country
                 </span>
-                {hoveredRegion.label}
+                {hoveredLabel}
               </p>
             ) : (
               <p className="text-ink/45 text-xs italic border-t border-ink/10 pt-2">
-                Hover a region on the map
+                Hover a peer country on the map
               </p>
             )}
           </div>

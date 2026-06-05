@@ -34,12 +34,12 @@ export function ContinuityIndex() {
           Which French institutional structures survived each peer&apos;s exit
           from empire? Scored at independence (year varies). Senegal leads the
           set; Guinea and non-French colonies score lowest.{" "}
-          <Link href="/culture#fork" className="text-rust underline hover:text-ink">
-            Exit paths
+          <Link href="/#map" className="text-rust underline hover:text-ink">
+            Regional map
           </Link>
           {" · "}
-          <Link href="/culture#map" className="text-rust underline hover:text-ink">
-            borders over time
+          <Link href="/culture#fork" className="text-rust underline hover:text-ink">
+            Exit paths
           </Link>
         </p>
       </header>
