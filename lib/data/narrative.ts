@@ -7,7 +7,95 @@ export const stakes =
 export const originalInsight = {
   title: "What this project adds",
   body: "Most accounts treat Senegal as culturally exceptional or French-favored. This site tests a narrower, comparative claim: the same colonial power built different state capacity in Dakar than in Bamako or Conakry — and Senegalese elites negotiated continuity rather than rupture at independence. The gap in coups and conflict years (below) is the empirical hook; the colonial-to-republic sequence is the mechanism story.",
+  bullets: [
+    "A comparative hook — not a Senegal survey — against six Francophone peers since 1960.",
+    "An author-coded institutional continuity index at independence (Senegal vs. Guinea vs. Mali).",
+    "Evidence you can re-weight: colonial state-building, elite bargains, Sufi mediation, ethnicity, Françafrique.",
+    "A progress-studies lens: stability as necessary but insufficient for shared prosperity.",
+  ],
 };
+
+export const executiveSummary = [
+  {
+    step: 1,
+    label: "The gap",
+    href: "#outlier",
+    text: "Senegal has zero successful coups since 1960; Francophone peers average far higher on coups and conflict years.",
+  },
+  {
+    step: 2,
+    label: "The mechanism",
+    href: "#continuity",
+    text: "Senegal negotiated exit in 1958 and inherited Dakar’s state apparatus; Guinea chose rupture.",
+  },
+  {
+    step: 3,
+    label: "The limit",
+    href: "#takeaway",
+    text: "Institutional calm bought partial progress — not East Asian growth or regional equality.",
+  },
+];
+
+export type EvidenceWeight = {
+  id: string;
+  label: string;
+  defaultWeight: number;
+  shortLabel: string;
+};
+
+export const evidenceWeights: EvidenceWeight[] = [
+  {
+    id: "colonial",
+    label: "Colonial state-building",
+    shortLabel: "Colonial admin",
+    defaultWeight: 35,
+  },
+  {
+    id: "elite",
+    label: "Elite continuity & managed pluralism",
+    shortLabel: "Elite continuity",
+    defaultWeight: 30,
+  },
+  {
+    id: "francafrique",
+    label: "French security & Françafrique",
+    shortLabel: "Françafrique",
+    defaultWeight: 15,
+  },
+  {
+    id: "ethnic",
+    label: "Relative ethnic cohesion",
+    shortLabel: "Ethnic cohesion",
+    defaultWeight: 10,
+  },
+  {
+    id: "sufi",
+    label: "Sufi brotherhoods",
+    shortLabel: "Sufi mediation",
+    defaultWeight: 10,
+  },
+];
+
+export function weightingConclusion(
+  weights: Record<string, number>,
+): string {
+  const ranked = [...evidenceWeights].sort(
+    (a, b) => (weights[b.id] ?? 0) - (weights[a.id] ?? 0),
+  );
+  const top = ranked[0]!;
+  const second = ranked[1]!;
+
+  if (top.id === "colonial" || top.id === "elite") {
+    return `With ${top.shortLabel} and ${second.shortLabel} weighted highest, the coup gap is best explained by inherited state capacity and negotiated succession — not culture alone.`;
+  }
+  if (top.id === "francafrique") {
+    return `With ${top.shortLabel} weighted highest, external security guarantees and post-colonial ties matter most — but that framing understates Senegal's distinctive 1958 path.`;
+  }
+  if (top.id === "sufi" || top.id === "ethnic") {
+    return `With ${top.shortLabel} weighted highest, social structure explains containment of violence — but the quantitative coup gap still points to institutions and elite bargains first.`;
+  }
+  return `Weighted toward ${top.shortLabel}, the site still shows Senegal as a regional outlier on institutional continuity at independence.`;
+}
 
 export const mainArgument = {
   claim:

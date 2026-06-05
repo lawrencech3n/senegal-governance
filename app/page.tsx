@@ -2,10 +2,13 @@ import Link from "next/link";
 import { StabilityOutlierChart } from "@/components/charts/StabilityOutlierChart";
 import { ProgressFrame } from "@/components/ProgressFrame";
 import { MethodologyNote } from "@/components/MethodologyNote";
+import { ExecutiveSummary } from "@/components/ExecutiveSummary";
+import { ContributionBox } from "@/components/ContributionBox";
+import { ContinuityIndex } from "@/components/ContinuityIndex";
+import { EvidenceWeighting } from "@/components/EvidenceWeighting";
 import {
   researchQuestion,
   stakes,
-  originalInsight,
   mainArgument,
   progressLens,
   counterpoints,
@@ -13,76 +16,52 @@ import {
   readingPath,
 } from "@/lib/data/narrative";
 
-const sections = [
-  {
-    href: "/government",
-    title: "Governance",
-    body: "Colonial rule, negotiated independence, coups and conflict data, and competing explanations.",
-  },
-  {
-    href: "/timeline",
-    title: "Timeline",
-    body: "Filter the independence arc (1945–1963) or walk the full sequence from Saint-Louis to Faye.",
-  },
-  {
-    href: "/culture",
-    title: "Institutional legacies",
-    body: "Indigénat, the CFA franc, and Françafrique — structures that outlasted 1960.",
-  },
-];
-
 export default function Home() {
   return (
-    <div className="space-y-20">
-      {/* Act I — Stakes */}
-      <section className="relative max-w-4xl">
+    <div className="space-y-16">
+      <section className="relative max-w-4xl space-y-8">
         <div className="absolute -left-6 top-0 bottom-0 w-1 rounded-full bg-rust/30" aria-hidden />
         <p className="text-xs uppercase tracking-[0.3em] text-rust mb-3">
           ECON 30 Capstone · Progress &amp; Inequality · Spring 2026
         </p>
-        <p className="act-label mb-4">Act I · The divergence</p>
-        <p className="prose-serif text-xl text-ink/90 mb-6 leading-relaxed max-w-3xl">
-          {stakes}
-        </p>
-        <h2 className="font-serif text-4xl md:text-5xl leading-[1.08] text-ink mb-5">
-          {researchQuestion}
-        </h2>
-        <p className="prose-serif text-ink/80 max-w-3xl">
-          Mali, Guinea, Burkina Faso, and Mauritania — independent the same
-          decade, under the same colonial power — have seen repeated coups, civil
-          wars, or state collapse. Senegal has had{" "}
-          <strong className="font-medium text-ink">no successful military coup</strong>
-          , three peaceful transfers of power at the ballot box, and one major
-          low-intensity conflict (Casamance). The charts below quantify that gap;
-          the rest of the site asks what produced it.
-        </p>
+        <ExecutiveSummary />
+        <div>
+          <p className="act-label mb-4">Act I · The divergence</p>
+          <p className="prose-serif text-xl text-ink/90 mb-6 leading-relaxed max-w-3xl">
+            {stakes}
+          </p>
+          <h2 className="font-serif text-4xl md:text-5xl leading-[1.08] text-ink mb-5">
+            {researchQuestion}
+          </h2>
+          <p className="prose-serif text-ink/80 max-w-3xl">
+            Same empire, same decade — different outcomes. The chart and continuity
+            index below quantify and code that gap; the rest of the site asks why.
+          </p>
+        </div>
       </section>
 
-      {/* Core interactive — rubric 4 */}
+      <ContributionBox />
+
       <section className="space-y-4" id="outlier">
         <p className="act-label">Act II · The evidence</p>
         <StabilityOutlierChart />
         <MethodologyNote />
       </section>
 
-      {/* Argument + original contribution — rubric 1 & 7 */}
-      <section className="grid lg:grid-cols-[1fr_1fr] gap-8 max-w-5xl">
-        <article className="border border-ink/15 bg-parchment/50 p-6 md:p-8 space-y-4">
-          <div className="text-xs uppercase tracking-[0.2em] text-rust">
-            Argument
-          </div>
-          <p className="text-sm text-ink/80 leading-relaxed">{mainArgument.claim}</p>
-          <p className="text-sm text-ink/70 leading-relaxed italic border-t border-ink/10 pt-4">
-            Mechanism: {mainArgument.mechanism}
-          </p>
-        </article>
-        <article className="border border-ink/15 bg-parchment/30 p-6 md:p-8 space-y-3">
-          <h3 className="font-serif text-xl text-ink">{originalInsight.title}</h3>
-          <p className="text-sm text-ink/80 leading-relaxed">{originalInsight.body}</p>
-        </article>
+      <ContinuityIndex />
+
+      <EvidenceWeighting />
+
+      <section className="max-w-3xl border border-ink/15 bg-parchment/50 p-6 md:p-8 space-y-3">
+        <div className="text-xs uppercase tracking-[0.2em] text-rust">
+          Argument
+        </div>
+        <p className="text-sm text-ink/80 leading-relaxed">{mainArgument.claim}</p>
+        <p className="text-sm text-ink/70 leading-relaxed italic border-t border-ink/10 pt-4">
+          Mechanism: {mainArgument.mechanism}
+        </p>
       </section>
 
-      {/* Progress lens — rubric 6 */}
       <section className="space-y-6 max-w-4xl">
         <p className="act-label">Act III · Progress &amp; inequality</p>
         <h3 className="font-serif text-3xl text-ink">{progressLens.title}</h3>
@@ -91,7 +70,6 @@ export default function Home() {
 
       <div className="divider-rule" />
 
-      {/* Reading path */}
       <section className="space-y-6">
         <h3 className="font-serif text-3xl text-ink">How to read this site</h3>
         <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 list-none">
@@ -110,25 +88,7 @@ export default function Home() {
         </ol>
       </section>
 
-      <section className="grid md:grid-cols-3 gap-6">
-        {sections.map((s) => (
-          <Link
-            key={s.href}
-            href={s.href}
-            className="group border border-ink/15 bg-parchment/50 p-6 hover:border-rust transition-all duration-100 hover:bg-parchment focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust"
-          >
-            <h3 className="font-serif text-2xl text-ink group-hover:text-rust transition-colors duration-75 mb-2">
-              {s.title}
-            </h3>
-            <p className="text-sm text-ink/70 leading-relaxed">{s.body}</p>
-            <div className="mt-4 text-xs uppercase tracking-[0.25em] text-ink/50 group-hover:text-rust">
-              Read →
-            </div>
-          </Link>
-        ))}
-      </section>
-
-      <section className="space-y-4 max-w-3xl">
+      <section id="limits" className="space-y-4 max-w-3xl">
         <h3 className="font-serif text-3xl text-ink">Limits &amp; counterpoints</h3>
         <ul className="space-y-3">
           {counterpoints.map((c) => (
@@ -140,7 +100,10 @@ export default function Home() {
         </ul>
       </section>
 
-      <section className="border border-ink/15 bg-parchment/60 p-8 md:p-10 max-w-3xl text-center mx-auto">
+      <section
+        id="takeaway"
+        className="border border-ink/15 bg-parchment/60 p-8 md:p-10 max-w-3xl text-center mx-auto"
+      >
         <div className="text-xs uppercase tracking-[0.25em] text-rust mb-3">
           Remember one line
         </div>
@@ -152,15 +115,11 @@ export default function Home() {
       <section className="max-w-3xl space-y-2 text-sm text-ink/60">
         <h3 className="font-serif text-xl text-ink">About this project</h3>
         <p>
-          Built for ECON 30 at Stanford. Live site:{" "}
-          <a
-            href="https://senegal-governance.vercel.app"
-            className="text-rust underline hover:text-ink"
-          >
-            senegal-governance.vercel.app
-          </a>
-          . One comparative question — not a survey of all Senegalese history.
-          Data: V-Dem, UCDP, CAM coups dataset.
+          Built for ECON 30 at Stanford. One comparative question — not a survey
+          of all Senegalese history. Data: V-Dem, UCDP, CAM coups dataset.{" "}
+          <Link href="/works-cited" className="text-rust underline hover:text-ink">
+            Works cited →
+          </Link>
         </p>
         <Link
           href="/government"

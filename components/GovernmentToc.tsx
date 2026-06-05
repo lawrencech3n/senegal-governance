@@ -2,7 +2,6 @@ const sections = [
   { id: "colonial", label: "Colonial rule" },
   { id: "transition", label: "Independence arc" },
   { id: "democracy", label: "Democracy index" },
-  { id: "post-independence", label: "After 1960" },
   { id: "violence", label: "Violence" },
   { id: "compare", label: "Regional compare" },
   { id: "hypotheses", label: "Hypotheses" },
