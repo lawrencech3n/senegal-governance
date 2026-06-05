@@ -35,7 +35,11 @@ export function ContinuityIndex() {
           from empire? Scored at independence (year varies). Senegal leads the
           set; Guinea and non-French colonies score lowest.{" "}
           <Link href="/culture#fork" className="text-rust underline hover:text-ink">
-            See exit paths →
+            Exit paths
+          </Link>
+          {" · "}
+          <Link href="/culture#map" className="text-rust underline hover:text-ink">
+            borders over time
           </Link>
         </p>
       </header>

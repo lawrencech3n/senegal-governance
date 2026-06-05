@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { cultureThemes } from "@/lib/data/culture";
 import { PageSynthesis } from "@/components/PageSynthesis";
 import { IndependenceForkDiagram } from "@/components/IndependenceForkDiagram";
+import { WestAfricaMap } from "@/components/WestAfricaMap";
 import { progressLens } from "@/lib/data/narrative";
 
 export const metadata: Metadata = {
@@ -30,6 +31,8 @@ export default function CulturePage() {
       </header>
 
       <IndependenceForkDiagram />
+
+      <WestAfricaMap />
 
       <section className="grid sm:grid-cols-2 gap-4 max-w-4xl">
         <article className="border border-ink/15 bg-parchment/40 p-5">
