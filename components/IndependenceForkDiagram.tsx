@@ -1,37 +1,55 @@
 import { regionalComparison } from "@/lib/data/government";
 import {
   independenceFork,
+  type ForkTone,
   type IndependencePath,
 } from "@/lib/data/culture";
+
+const toneStyles: Record<
+  ForkTone,
+  { accent: string; dot: string; badge: string }
+> = {
+  continuity: {
+    accent: "border-sage bg-parchment/60",
+    dot: "bg-sage",
+    badge: "bg-sage text-parchment",
+  },
+  rupture: {
+    accent: "border-rust/40 bg-parchment/40",
+    dot: "bg-rust",
+    badge: "bg-rust text-parchment",
+  },
+  other: {
+    accent: "border-ochre/50 bg-parchment/35",
+    dot: "bg-ochre",
+    badge: "bg-ink/70 text-parchment",
+  },
+};
 
 function PathColumn({
   path,
   coups,
   yearsOfWar,
-  tone,
+  highlight,
 }: {
   path: IndependencePath;
   coups: number;
   yearsOfWar: number;
-  tone: "continuity" | "rupture";
+  highlight?: boolean;
 }) {
-  const accent =
-    tone === "continuity"
-      ? "border-sage bg-parchment/60"
-      : "border-rust/40 bg-parchment/40";
-  const dot = tone === "continuity" ? "bg-sage" : "bg-rust";
-  const voteBadge =
-    tone === "continuity"
-      ? "bg-sage text-parchment"
-      : "bg-rust text-parchment";
+  const style = toneStyles[path.tone];
 
   return (
-    <article className={`border ${accent} p-5 md:p-6 space-y-5 h-full`}>
+    <article
+      className={`border ${style.accent} p-4 md:p-5 space-y-4 h-full ${
+        highlight ? "ring-2 ring-oxblood/20" : ""
+      }`}
+    >
       <header className="space-y-2">
-        <h4 className="font-serif text-2xl text-ink">{path.country}</h4>
+        <h4 className="font-serif text-xl text-ink">{path.country}</h4>
         <div className="flex flex-wrap items-center gap-2">
           <span
-            className={`text-xs uppercase tracking-[0.2em] px-2 py-1 ${voteBadge}`}
+            className={`text-[0.65rem] uppercase tracking-[0.15em] px-2 py-1 ${style.badge}`}
           >
             {path.vote}
           </span>
@@ -43,41 +61,41 @@ function PathColumn({
         {path.steps.map((step, index) => (
           <li
             key={step.label}
-            className={`relative pl-6 pb-5 ${
+            className={`relative pl-5 pb-4 ${
               index < path.steps.length - 1
                 ? "border-l border-ink/15 ml-1.5"
                 : ""
             }`}
           >
             <span
-              className={`absolute left-0 top-1.5 w-3 h-3 rounded-full border border-ink/20 ${dot}`}
+              className={`absolute left-0 top-1.5 w-2.5 h-2.5 rounded-full border border-ink/20 ${style.dot}`}
               aria-hidden
             />
-            <div className="text-xs uppercase tracking-[0.15em] text-rust mb-0.5">
+            <div className="text-[0.65rem] uppercase tracking-[0.12em] text-rust mb-0.5">
               {step.year}
             </div>
             <div className="font-medium text-ink text-sm">{step.label}</div>
-            <p className="text-sm text-ink/70 leading-relaxed mt-1">
+            <p className="text-xs text-ink/70 leading-relaxed mt-1">
               {step.detail}
             </p>
           </li>
         ))}
       </ol>
 
-      <footer className="border-t border-ink/10 pt-4 grid grid-cols-2 gap-3">
+      <footer className="border-t border-ink/10 pt-3 grid grid-cols-2 gap-2">
         <div>
-          <div className="text-xs uppercase tracking-[0.15em] text-ink/50 mb-1">
+          <div className="text-[0.65rem] uppercase tracking-[0.12em] text-ink/50 mb-0.5">
             Coups since 1960
           </div>
-          <div className="font-serif text-3xl text-ink leading-none">
+          <div className="font-serif text-2xl text-ink leading-none">
             {coups}
           </div>
         </div>
         <div>
-          <div className="text-xs uppercase tracking-[0.15em] text-ink/50 mb-1">
+          <div className="text-[0.65rem] uppercase tracking-[0.12em] text-ink/50 mb-0.5">
             Conflict years
           </div>
-          <div className="font-serif text-3xl text-ink leading-none">
+          <div className="font-serif text-2xl text-ink leading-none">
             {yearsOfWar}
           </div>
         </div>
@@ -87,9 +105,6 @@ function PathColumn({
 }
 
 export function IndependenceForkDiagram() {
-  const senegalStats = regionalComparison.find((c) => c.country === "Senegal")!;
-  const guineaStats = regionalComparison.find((c) => c.country === "Guinea")!;
-
   return (
     <figure
       id="fork"
@@ -104,56 +119,38 @@ export function IndependenceForkDiagram() {
         </p>
       </figcaption>
 
-      <div className="flex flex-col items-center gap-2 py-2">
-        <div className="border border-ink/20 bg-parchment px-4 py-3 text-center max-w-md">
-          <div className="text-xs uppercase tracking-[0.2em] text-rust mb-1">
-            {independenceFork.referendum.year}
-          </div>
-          <div className="font-serif text-lg text-ink">
-            {independenceFork.referendum.label}
-          </div>
+      <div className="border border-ink/20 bg-parchment px-4 py-3 text-center max-w-lg mx-auto">
+        <div className="text-xs uppercase tracking-[0.2em] text-rust mb-1">
+          {independenceFork.referendum.year}
         </div>
-
-        <svg
-          viewBox="0 0 320 48"
-          className="w-48 h-12 text-ink/25 hidden sm:block"
-          aria-hidden
-        >
-          <path
-            d="M160 0 V16 M160 16 L48 44 M160 16 L272 44"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          />
-          <circle cx="48" cy="44" r="4" className="fill-sage" />
-          <circle cx="272" cy="44" r="4" className="fill-rust" />
-        </svg>
-
-        <div className="flex gap-8 text-xs uppercase tracking-[0.2em] text-ink/50 sm:hidden">
-          <span>↓ Senegal</span>
-          <span>↓ Guinea</span>
+        <div className="font-serif text-lg text-ink">
+          {independenceFork.referendum.label}
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-        <PathColumn
-          path={independenceFork.senegal}
-          coups={senegalStats.coups}
-          yearsOfWar={senegalStats.yearsOfWar}
-          tone="continuity"
-        />
-        <PathColumn
-          path={independenceFork.guinea}
-          coups={guineaStats.coups}
-          yearsOfWar={guineaStats.yearsOfWar}
-          tone="rupture"
-        />
+      <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
+        {independenceFork.paths.map((path) => {
+          const stats = regionalComparison.find(
+            (c) => c.country === path.country,
+          )!;
+          return (
+            <PathColumn
+              key={path.country}
+              path={path}
+              coups={stats.coups}
+              yearsOfWar={stats.yearsOfWar}
+              highlight={path.country === "Senegal"}
+            />
+          );
+        })}
       </div>
 
       <p className="text-xs text-ink/55 max-w-3xl">
         Outcome metrics: CAM coups dataset; UCDP conflict years (1989–2024, ≥
-        25 battle deaths). The fork does not explain everything — but it frames
-        which institutional legacies Senegal carried forward and Guinea did not.
+        25 battle deaths). A yes vote in 1958 did not guarantee stability —
+        Mauritania and Burkina Faso show that inherited institutions and military
+        politics still diverged. Senegal&apos;s distinction is the combination of
+        yes vote, AOF capital, and elite continuity.
       </p>
     </figure>
   );
