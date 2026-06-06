@@ -61,7 +61,7 @@ export const counterpoints = [
 ];
 
 export const takeaway =
-  "Senegal's quiet is real but relative: inherited institutions and managed politics kept the worst regional outcomes at bay — without yet solving shared prosperity.";
+  "This project compared Senegal to six Francophone peers since 1960 and argues that inherited state institutions and negotiated exit from empire—not cultural exception—best explain its relative stability. That calm preserved the institutional floor for partial progress in health and education, but broad prosperity remains unfinished: for progress studies, political quiet is necessary, not sufficient, and recent stress tests suggest the old bargain may be fraying.";
 
 export const readingPath = [
   {

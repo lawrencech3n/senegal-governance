@@ -100,9 +100,12 @@ export default function Home() {
         className="border border-ink/15 bg-parchment/60 p-8 md:p-10 max-w-3xl text-center mx-auto"
       >
         <div className="text-xs uppercase tracking-[0.25em] text-rust mb-3">
-          Remember one line
+          Conclusion
         </div>
-        <p className="font-serif text-2xl md:text-3xl text-ink leading-snug">
+        <p className="text-sm text-ink/65 max-w-2xl mx-auto mb-4 leading-relaxed">
+          What the comparative evidence adds up to:
+        </p>
+        <p className="font-serif text-xl md:text-2xl text-ink leading-snug max-w-2xl mx-auto">
           {takeaway}
         </p>
       </section>

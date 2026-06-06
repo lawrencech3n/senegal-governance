@@ -168,7 +168,7 @@ export default function GovernmentPage() {
 
         <section className="border-l-4 border-ochre pl-6 max-w-3xl py-2">
           <div className="text-xs uppercase tracking-[0.2em] text-rust mb-2">
-            Takeaway
+            Conclusion
           </div>
           <p className="font-serif text-xl text-ink leading-snug">{takeaway}</p>
           <p className="text-sm text-ink/60 mt-3">
