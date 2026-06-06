@@ -78,7 +78,8 @@ export function WestAfricaMap() {
         <p className="text-sm text-ink/70 leading-relaxed">
           The seven peer states on real coastlines and borders (Natural Earth).
           Toggle the era to see colonial partition, then compare to the charts
-          below. Neighboring countries are shown in outline for context only.
+          below. I&apos;ve left neighboring countries in outline for context
+          only.
         </p>
       </figcaption>
 

@@ -30,7 +30,7 @@ export default function TimelinePage() {
 
       <PageSynthesis>
         The timeline shows timing, not causation — but the clustering of
-        political milestones between 1946 and 1960 supports the claim that
+        political milestones between 1946 and 1960 supports my claim that
         Senegal exited through negotiation while peers inherited weaker centers
         or sharper military fractures.
       </PageSynthesis>

@@ -31,8 +31,9 @@ export default function Home() {
             {researchQuestion}
           </h2>
           <p className="prose-serif text-ink/80 max-w-3xl">
-            Same empire, same decade — different outcomes. The map and charts
-            below locate and quantify the gap; the rest of the site asks why.
+            Same empire, same decade — different outcomes. I&apos;ve mapped and
+            charted the gap below; the rest of these pages are my attempt to
+            explain it.
           </p>
         </div>
       </section>
@@ -66,7 +67,7 @@ export default function Home() {
       <div className="divider-rule" />
 
       <section className="space-y-6">
-        <h3 className="font-serif text-3xl text-ink">How to read this site</h3>
+        <h3 className="font-serif text-3xl text-ink">Where to go next</h3>
         <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 list-none">
           {readingPath.map((step) => (
             <li key={step.step}>
@@ -103,7 +104,7 @@ export default function Home() {
           Conclusion
         </div>
         <p className="text-sm text-ink/65 max-w-2xl mx-auto mb-4 leading-relaxed">
-          What the comparative evidence adds up to:
+          Here&apos;s what I think the evidence adds up to:
         </p>
         <p className="font-serif text-xl md:text-2xl text-ink leading-snug max-w-2xl mx-auto">
           {takeaway}
@@ -111,10 +112,10 @@ export default function Home() {
       </section>
 
       <section className="max-w-3xl space-y-2 text-sm text-ink/60">
-        <h3 className="font-serif text-xl text-ink">About this project</h3>
+        <h3 className="font-serif text-xl text-ink">About this paper</h3>
         <p>
-          Built for ECON 30 at Stanford. One comparative question — not a survey
-          of all Senegalese history. Data: V-Dem, UCDP, CAM coups dataset.{" "}
+          I built this for ECON 30 at Stanford — one comparative question, not a
+          survey of all Senegalese history. Data: V-Dem, UCDP, CAM coups dataset.{" "}
           <Link href="/works-cited" className="text-rust underline hover:text-ink">
             Works cited →
           </Link>

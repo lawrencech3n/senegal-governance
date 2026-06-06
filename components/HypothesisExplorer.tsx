@@ -28,7 +28,7 @@ export function HypothesisExplorer() {
           Explore the explanations
         </h4>
         <p className="text-sm text-ink/70">
-          Select a hypothesis to see what evidence this project brings to bear.
+          Pick a hypothesis to see how I read the evidence.
         </p>
       </div>
       <div
@@ -65,7 +65,7 @@ export function HypothesisExplorer() {
       >
         <div>
           <div className="flex justify-between text-xs text-ink/60 mb-1">
-            <span>Evidence strength on this site</span>
+            <span>How strongly I read the evidence</span>
             <span>{strength.text}</span>
           </div>
           <div className="h-1.5 bg-ink/10 rounded-full overflow-hidden">
@@ -76,7 +76,7 @@ export function HypothesisExplorer() {
         </div>
         <p className="text-sm text-ink/80 leading-relaxed">{h.body}</p>
         <div className="text-sm">
-          <span className="font-medium text-ink">Evidence on this site: </span>
+          <span className="font-medium text-ink">What I point to: </span>
           <span className="text-ink/75">{h.evidence}</span>
         </div>
         {h.chartLink && (

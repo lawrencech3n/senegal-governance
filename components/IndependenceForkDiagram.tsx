@@ -146,11 +146,12 @@ export function IndependenceForkDiagram() {
       </div>
 
       <p className="text-xs text-ink/55 max-w-3xl">
-        Outcome metrics: CAM coups dataset; UCDP conflict years (1989–2024, ≥
-        25 battle deaths). A yes vote in 1958 did not guarantee stability —
-        Mauritania and Burkina Faso show that inherited institutions and military
-        politics still diverged. Senegal&apos;s distinction is the combination of
-        yes vote, AOF capital, and elite continuity.
+        Outcome metrics from the CAM coups dataset and UCDP conflict years
+        (1989–2024, ≥ 25 battle deaths). A yes vote in 1958 did not guarantee
+        stability — Mauritania and Burkina Faso show that inherited institutions
+        and military politics still diverged. Senegal&apos;s distinction, in my
+        reading, is the combination of yes vote, AOF capital, and elite
+        continuity.
       </p>
     </figure>
   );

@@ -5,7 +5,7 @@ export function ProgressFrame() {
     { label: "Bottleneck removed", value: progressLens.bottleneck },
     { label: "Partial engine", value: progressLens.engine },
     { label: "Who gains", value: progressLens.whoGains },
-    { label: "What we learn", value: progressLens.futureLearning },
+    { label: "What I take from this", value: progressLens.futureLearning },
   ];
 
   return (
@@ -44,7 +44,7 @@ export function ProgressFrame() {
           id="progress-synthesis-heading"
           className="text-xs uppercase tracking-[0.2em] text-rust"
         >
-          Progress synthesis
+          My read
         </h4>
         {progressLens.paragraphs.map((paragraph) => (
           <p key={paragraph.slice(0, 40)} className="prose-serif text-ink/85">

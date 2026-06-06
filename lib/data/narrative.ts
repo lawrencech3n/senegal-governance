@@ -5,12 +5,12 @@ export const stakes =
   "In 1960, six Francophone West African states left the same empire. Within a generation, most had coups, civil wars, or both. Senegal did not — and that divergence shaped who could invest, migrate, and learn in peace.";
 
 export const originalInsight = {
-  title: "What this project adds",
-  body: "Most accounts treat Senegal as culturally exceptional or French-favored. This site tests a narrower, comparative claim: the same colonial power built different state capacity in Dakar than in Bamako or Conakry — and Senegalese elites negotiated continuity rather than rupture at independence. The gap in coups and conflict years (below) is the empirical hook; the colonial-to-republic sequence is the mechanism story.",
+  title: "What I'm trying to add",
+  body: "Most accounts treat Senegal as culturally exceptional or French-favored. I wanted to test something narrower: the same colonial power built different state capacity in Dakar than in Bamako or Conakry — and Senegalese elites negotiated continuity rather than rupture at independence. The coup and conflict gap below is my empirical hook; the colonial-to-republic sequence is the mechanism story.",
   bullets: [
     "A comparative hook — not a Senegal survey — against six Francophone peers since 1960.",
-    "A 1958 fork diagram comparing exit paths for all seven peer states at independence.",
-    "Hypothesis explorer weighing colonial state-building, elite bargains, Sufi mediation, ethnicity, and Françafrique.",
+    "A 1958 fork diagram for all seven peer states at independence.",
+    "A hypothesis explorer where I weigh colonial state-building, elite bargains, Sufi mediation, ethnicity, and Françafrique.",
     "A progress-studies lens: stability as necessary but insufficient for shared prosperity.",
   ],
 };
@@ -22,8 +22,8 @@ export const mainArgument = {
     "Institutional continuity lowered the payoff to military seizure of power while keeping enough space for negotiated succession — a pattern rare among peers who inherited weaker bureaucracies and sharper elite fractures.",
 };
 
-export const authorSynthesis =
-  "If I had to weight the evidence on this site, colonial state-building and negotiated transition matter most for explaining the coup gap; Sufi mediation and Françafrique matter for explaining why violence stayed peripheral (Casamance) rather than national. None of that makes Senegal a model for growth — it bought time for partial progress while leaving inequality and youth unemployment unresolved.";
+export const personalSynthesis =
+  "If I had to weight the evidence I've gathered here, colonial state-building and negotiated transition matter most for explaining the coup gap; Sufi mediation and Françafrique matter for explaining why violence stayed peripheral (Casamance) rather than national. None of that makes Senegal a model for growth — it bought time for partial progress while leaving inequality and youth unemployment unresolved.";
 
 export const progressLens = {
   title: "Why this matters for progress",
@@ -37,7 +37,7 @@ export const progressLens = {
     "For progress studies: stability is a necessary but insufficient condition. The 2021–2024 stress tests ask whether Senegal can renew its settlement without repeating neighbors' ruptures — or whether managed politics will finally exhaust reform capacity.",
   paragraphs: [
     "Institutional breakdown is a development tax: when governments fall to force, schooling stops, investment flees, and reform halts. Senegal paid a different price — it kept the institutional floor intact long enough for partial gains in health, education, and urbanization, even as GDP growth underperformed peers with more volatile politics.",
-    "That is not a success story on its own. Senegal remains lower-middle-income, with youth unemployment above 20% and gains concentrated in Dakar while Casamance lags. The open question for progress studies: did the same elite bargains that prevented coups also slow the structural reforms those gains require?",
+    "I don't think that's a success story on its own. Senegal remains lower-middle-income, with youth unemployment above 20% and gains concentrated in Dakar while Casamance lags. The question I'm left with: did the same elite bargains that prevented coups also slow the structural reforms those gains require?",
   ],
 };
 
@@ -56,19 +56,19 @@ export const counterpoints = [
   },
   {
     title: "Selection bias in comparison",
-    body: "The Gambia also has zero coups in our dataset but is tiny and different in structure. Mali and Burkina Faso had stronger militaries at independence — comparisons must account for starting conditions.",
+    body: "The Gambia also has zero coups in my dataset but is tiny and different in structure. Mali and Burkina Faso had stronger militaries at independence — I have to account for starting conditions.",
   },
 ];
 
 export const takeaway =
-  "This project compared Senegal to six Francophone peers since 1960 and argues that inherited state institutions and negotiated exit from empire—not cultural exception—best explain its relative stability. That calm preserved the institutional floor for partial progress in health and education, but broad prosperity remains unfinished: for progress studies, political quiet is necessary, not sufficient, and recent stress tests suggest the old bargain may be fraying.";
+  "I compared Senegal to six Francophone peers since 1960 and think inherited state institutions and negotiated exit from empire—not cultural exception—best explain its relative stability. That calm preserved the institutional floor for partial progress in health and education, but broad prosperity remains unfinished: for progress studies, political quiet is necessary, not sufficient, and recent stress tests suggest the old bargain may be fraying.";
 
 export const readingPath = [
   {
     step: 1,
     href: "/government",
     title: "Evidence",
-    body: "Use the outlier chart and regional comparison — then trace colonial rule to alternation.",
+    body: "Start with the outlier chart and regional comparison — then trace colonial rule to alternation.",
   },
   {
     step: 2,
@@ -86,6 +86,6 @@ export const readingPath = [
     step: 4,
     href: "/works-cited",
     title: "Sources",
-    body: "Datasets and scholarship behind the claims.",
+    body: "Datasets and scholarship behind my claims.",
   },
 ];

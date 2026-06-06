@@ -22,11 +22,11 @@ export default function CulturePage() {
           Institutional legacies
         </h2>
         <p className="prose-serif text-ink/80">
-          Stability is not only elections and coups. Colonial and post-colonial
-          institutions — legal categories, currency, security pacts — shaped who
-          could rule and how challengers were absorbed or suppressed. These
-          legacies help explain why independence did not produce the same ruptures
-          as in Mali or Guinea.{" "}
+          Stability is not only elections and coups. I focus here on colonial
+          and post-colonial institutions — legal categories, currency, security
+          pacts — that shaped who could rule and how challengers were absorbed
+          or suppressed. These legacies help explain why independence did not
+          produce the same ruptures as in Mali or Guinea.{" "}
           <Link href="/#map" className="text-rust underline hover:text-ink">
             See the regional map on the overview
           </Link>
@@ -79,8 +79,8 @@ export default function CulturePage() {
       <PageSynthesis>
         The CFA franc and Françafrique ties are the hardest legacies to
         quantify — but they matter for progress because they bound monetary and
-        security choices long after independence. That continuity may have
-        discouraged coups while also limiting policy autonomy.
+        security choices long after independence. I think that continuity may
+        have discouraged coups while also limiting policy autonomy.
       </PageSynthesis>
 
       <section className="border-l-4 border-rust pl-6 max-w-3xl">

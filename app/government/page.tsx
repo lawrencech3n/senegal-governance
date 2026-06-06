@@ -12,7 +12,7 @@ import { colonialHistory } from "@/lib/data/colonial";
 import {
   mainArgument,
   researchQuestion,
-  authorSynthesis,
+  personalSynthesis,
   takeaway,
 } from "@/lib/data/narrative";
 
@@ -158,13 +158,13 @@ export default function GovernmentPage() {
             6. Competing explanations
           </h3>
           <p className="prose-serif text-ink/80 max-w-3xl mb-2">
-            Select a hypothesis to see what evidence this project brings to bear.
-            No single factor wins in the literature.
+            Pick a hypothesis to see how I read the evidence. No single factor
+            wins in the literature — or in my account.
           </p>
           <HypothesisExplorer />
         </section>
 
-        <PageSynthesis>{authorSynthesis}</PageSynthesis>
+        <PageSynthesis>{personalSynthesis}</PageSynthesis>
 
         <section className="border-l-4 border-ochre pl-6 max-w-3xl py-2">
           <div className="text-xs uppercase tracking-[0.2em] text-rust mb-2">
@@ -172,7 +172,7 @@ export default function GovernmentPage() {
           </div>
           <p className="font-serif text-xl text-ink leading-snug">{takeaway}</p>
           <p className="text-sm text-ink/60 mt-3">
-            Limits and counterpoints:{" "}
+            My limits and counterpoints:{" "}
             <Link href="/#limits" className="text-rust underline hover:text-ink">
               overview →
             </Link>

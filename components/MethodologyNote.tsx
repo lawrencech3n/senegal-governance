@@ -5,11 +5,11 @@ export function MethodologyNote() {
         Methodology
       </p>
       <p>
-        <strong className="font-medium text-ink">Peer set:</strong> Mali, Guinea,
-        Guinea-Bissau, Mauritania, Burkina Faso, and The Gambia — Francophone
-        West African states independent in the same decade under French rule.
-        The Gambia is included despite structural differences (noted as a
-        counterpoint).
+        <strong className="font-medium text-ink">Peer set:</strong> I compare
+        Mali, Guinea, Guinea-Bissau, Mauritania, Burkina Faso, and The Gambia
+        — Francophone West African states independent in the same decade under
+        French rule. The Gambia is included despite structural differences (I
+        note that as a counterpoint).
       </p>
       <p>
         <strong className="font-medium text-ink">Coups:</strong> successful

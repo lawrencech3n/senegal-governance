@@ -124,7 +124,7 @@ export default function WorksCitedPage() {
         <h2 className="font-serif text-5xl text-ink mb-4">Works Cited</h2>
         <p className="prose-serif text-ink/80">
           Sources for the governance comparison and institutional legacies.
-          Interpretation and framing are the author&apos;s.
+          Interpretation and framing are mine.
         </p>
       </header>
 

@@ -40,7 +40,7 @@ export type IndependencePath = {
 export const independenceFork = {
   title: "1958 and after: How each peer exited empire",
   subtitle:
-    "Francophone states faced de Gaulle’s 1958 French Community referendum; Guinea voted no, most peers voted yes. Guinea-Bissau (Portuguese) and The Gambia (British) followed different colonial paths — scored as comparators, not identical forks.",
+    "Francophone states faced de Gaulle’s 1958 French Community referendum; Guinea voted no, most peers voted yes. Guinea-Bissau (Portuguese) and The Gambia (British) followed different colonial paths — I include them as comparators, not identical forks.",
   referendum: {
     year: 1958,
     label: "French Community referendum (Francophone AOF territories)",

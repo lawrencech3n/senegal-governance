@@ -32,7 +32,7 @@ const metricConfig: Record<
     unit: "coups",
     insight: (gap, avg) =>
       gap >= avg
-        ? `Senegal's zero coups vs. a ${avg.toFixed(1)} peer average — the widest governance gap in this comparison. Mali and Mauritania alone account for most of the regional total.`
+        ? `Senegal's zero coups vs. a ${avg.toFixed(1)} peer average — the widest governance gap in my comparison. Mali and Mauritania alone account for most of the regional total.`
         : `Senegal matches peers on coups but the comparison still shows divergence on conflict intensity.`,
   },
   yearsOfWar: {
@@ -72,8 +72,8 @@ export function StabilityOutlierChart() {
         </h4>
         <p className="text-xs text-ink/60">
           Toggle the metric. The dashed line is the peer average (excluding
-          Senegal). How far below it Senegal sits is the outlier this project
-          explains.
+          Senegal). How far below it Senegal sits is the outlier I&apos;m trying
+          to explain.
         </p>
       </header>
 
